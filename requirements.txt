@@ -12,7 +12,6 @@ django-taggit==1.1.0
 idna==2.8
 imagekit==1.0.6
 Markdown==3.1.1
-mysqlclient==1.4.4
 oauthlib==3.1.0
 Pillow==6.1.0
 Pygments==2.4.2
