@@ -1,0 +1,82 @@
+<!-- extends表明此页面继承自 base.html 文件 -->
+{% extends "base.html" %}
+
+<!-- 写入 base.html 中定义的 title -->
+{% block title %}
+    文章详情
+{% endblock title %}
+
+<!-- 写入 base.html 中定义的 content -->
+{% block content %}
+
+<!-- 文章详情 -->
+<div class="container">
+    <div class="row">
+        <!-- 标题及作者 -->
+        <h1 class="col-12 mt-4 mb-4">{{ articles.title }}</h1>
+        <div class="col-12 alert alert-success">作者：{{ articles.author }}
+        ·<a href="{% url "article:article_delete" articles.id %}">删除文章</a>
+            · <a href="{% url "article:article_update" articles.id %}">编辑文章</a>
+        </div>
+
+        <!-- 文章正文 -->
+        <div class="col-12">
+            <p>{{ articles.body|safe }}</p>
+        </div>
+
+
+        <hr>
+        {% if user.is_authenticated %}
+        <div>
+            <form action="{% url 'comment:post_comment' articles.id %}" method='POST'>
+                {% csrf_token %}
+                <div class="form-group">
+                    <label for="body">
+                        <strong>
+                            评论:
+                        </strong>
+                    </label>
+                    <div>
+                        {{ comment_form.media }}
+                        {{ comment_form.body }}
+        </div>
+                <button type="submit" class="btn btn-secondary">确定</button>
+            </form>
+    </div>
+        <br>
+        {% else %}
+        <br>
+        <h5 class="row justify-content-center">
+            <a href="{% url 'userprofile:login' %}">登陆</a>
+        </h5>
+        <br>
+        {% endif %}
+
+    <h4 >{{ comment.count }}条评论</h4>
+    <div>
+        {% for comment in comment %}
+        <hr>
+        <p>
+            <strong style="color: pink">
+                {{ comment.user }}
+            </strong>于
+            <span style="color: green">
+                {{ comment.created | date:"Y-m-d H:i:s" }}
+            </span>时说：
+        </p>
+        <pre style="font-family: inherit;font-size:1em; ">
+            {{ comment.body|safe }}
+        </pre>
+        {% endfor %}
+    </div>
+</div>
+
+{% block script %}
+    <script>
+    $(".django-ckeditor-widget").removeAttr('style');
+    </script>
+{% endblock script %}
+
+
+{% endblock content %}
+
