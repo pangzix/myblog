@@ -1,7 +1,7 @@
 <!-- extends表明此页面继承自 base.html 文件 -->
 {% extends "base.html" %}
 {% load staticfiles %}
-
+{% load article_extras %}
 <!-- 写入 base.html 中定义的 title -->
 {% block title %}
     首页
@@ -45,11 +45,8 @@
 
 
             <aside class="col-md-4">
-<div class="card" style="width: 18rem;">
-  <div class="card-body">
-    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-  </div>
-</div>
+                 {% show_recent_articles %}
+
             </aside>
         </div>
     </div>

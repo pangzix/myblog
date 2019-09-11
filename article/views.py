@@ -1,5 +1,5 @@
 from django.shortcuts import render,redirect
-from .models import ArticlePost
+from .models import ArticlePost,Timeline
 from django.http import HttpResponse
 from .forms import ArticlePostForm
 from django.contrib.auth.models import User
@@ -8,8 +8,14 @@ from django.core.paginator import Paginator
 from comment.models import Comment
 from comment.forms import CommentForm
 import markdown
+from django.views import generic
 # Create your views here.
 
+
+class TimelineView(generic.ListView):
+    model = Timeline
+    template_name = 'article/timeline.html'
+    context_object_name = 'timeline_list'
 
 def index_view(request):
     articles = ArticlePost.objects.all()
