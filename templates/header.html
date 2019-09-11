@@ -1,28 +1,26 @@
 <!-- 定义导航栏 -->
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-  <div class="container">
+<nav class="navbar navbar-expand-md navbar-light bg-light">
 
     <!-- 导航栏商标 -->
-    <a class="navbar-brand" href="#">aaa</a>
-
-    <!-- 导航入口 -->
-    <div>
-      <ul class="navbar-nav">
-        <!-- 条目 -->
-      <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                        <ul class="nav navbar-nav navbar-right">
-
-                        </ul>
-                    </div><!-- /.navbar-collapse -->
-        <li class="nav-item">
-            <a class="nav-link" href="{% url 'index_url' %}" >index</a></li>
-            <a class="nav-link" href="{% url 'article:article_list' %}">Article</a>
-            <a class="nav-link" href="{% url 'article:article_list' %}">Picture</a>
-            <a class="nav-link" href="{% url 'article:article_list' %}">Videos</a>
-        </li>
-          {% if user.is_authenticated %}
-               <div class="btn-group">
-            <a role="button" class="btn btn-light" href="{% url "userprofile:edit" user.id %}"><i class="fas fa-user"></i></a>
+    <a class="navbar-brand" href="{% url 'index_url' %}">Lesphon</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+    <div class="collapse navbar-collapse" id="collapsibleNavbar">
+    <ul class="navbar-nav">
+            <li class="nav-item">
+                 <a class="nav-link" href="{% url 'article:article_list' %}">Article</a>
+            </li>
+            <li class="nav-item">
+                 <a class="nav-link" href="{% url 'article:article_list' %}">Picture</a>
+            </li>
+            <li class="nav-item">
+                 <a class="nav-link" href="{% url 'article:article_list' %}">Videos</a>
+            </li>
+            <li class="nav-item">
+                 {% if user.is_authenticated %}
+            <div class="btn-group">
+            <a role="button" class="btn btn-light" href="{% url "userprofile:edit" user.id %}"><i class="fas fa-user text-secondary"></i></a>
           <button class="btn btn-light dropdown-toggle dropdown-toggle-split" type="button"  data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
            <span class="sr-only">Toggle Dropdown</span>
           </button>
@@ -33,11 +31,12 @@
         </div>
        {% else %}
           <li class="nav-item">
-              <a class="nav-link" href="{% url 'userprofile:login' %}"><i class="fas fa-sign-in-alt"></i></a>
+              <a class="nav-link" href="{% url 'userprofile:login' %}"><i class="fas fa-sign-in-alt text-secondary"></i></a>
           </li>
           {% endif %}
-      </ul>
+            </li>
+
+        </ul>
     </div>
 
-  </div>
 </nav>
