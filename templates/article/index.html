@@ -23,7 +23,7 @@
                         </h1>
                         <div class="entry-meta">
 
-                            <span><i class="fas fa-clock bg text-secondary" style="color: pink;"></i>{{ article.updated|date:'Y-m-d' }}</span>
+                            <span><i class="fas fa-clock bg text-secondary" style="color: pink;"></i>{{ article.created|timesince_zh }}</span>
                             <span><i class="fas fa-comments text-secondary" style="color: yellowgreen;"></i><!-- 修改为评论的计数 -->{{ article.comments.count }}&nbsp;&nbsp;&nbsp;</span>
                             <span><i class="fas fa-eye text-secondary" style="color: lightskyblue;"></i>{{ article.total_views }}&nbsp;&nbsp;&nbsp;</span>
                         </div>

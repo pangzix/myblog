@@ -1,7 +1,7 @@
 <!-- extends表明此页面继承自 base.html 文件 -->
 {% extends "base.html" %}
 {% load staticfiles %}
-
+{% load article_extras %}
 <!-- 写入 base.html 中定义的 title -->
 {% block title %}
     首页
@@ -60,7 +60,7 @@
     </span>
             <span>
                 <i class="fas fa-clock" style="color: pink;"></i>
-            {{ article.updated|date:'Y-m-d' }}
+            {{ article.created|timesince_zh }}
             </span>
                 </p>
             <hr>
