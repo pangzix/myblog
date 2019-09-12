@@ -3,7 +3,7 @@
   <ul>
     {% for article in recent_article_list %}
       <li>
-        <a   class="text-danger " href="{{ article.get_absolute_url }}">{{ article.title }}</a>
+        <a   class="text-danger hvr-forward no-underline" href="{{ article.get_absolute_url }}">{{ article.title }}</a>
       </li>
     {% empty %}
       暂无文章！
