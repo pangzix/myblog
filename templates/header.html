@@ -2,21 +2,32 @@
 <nav class="navbar navbar-expand-md navbar-light bg-light">
 
     <!-- 导航栏商标 -->
-    <a class="navbar-brand" href="{% url 'index_url' %}">Lesphon</a>
+    <a class="navbar-brand" href="{% url 'index_url' %}">我的笔记本</a>
+
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
     <span class="navbar-toggler-icon"></span>
-  </button>
-    <div class="collapse navbar-collapse" id="collapsibleNavbar">
-    <ul class="navbar-nav">
+   </button>
+
+    <div class="collapse navbar-collapse justify-content-end" id="collapsibleNavbar">
+
+                    <form class="nav-item navbar-form mr-2 py-md-2 " role="search" method="get" id="searchform" action="{% url 'article:haystack_search' %}">
+                    <div class="input-group">
+                        <input type="text" name="q" class="form-control" placeholder="搜索" autocomplete="off" required=True>
+                        <div class="input-group-btn">
+                            <button class="btn btn-secondary " type="submit"><i class="fa fa-search bg"></i></button>
+                        </div>
+                    </div><!-- /input-group -->
+                </form>
+    <ul class="navbar-nav d-inline-flex ">
             <li class="nav-item">
-                 <a class="nav-link" href="{% url 'article:article_list' %}">Article</a>
+                 <a class="nav-link " href="{% url 'article:article_list' %} ">文字</a>
             </li>
             <li class="nav-item">
-                 <a class="nav-link" href="{% url 'article:article_list' %}">足迹</a>
+                 <a class="nav-link" href="{% url 'article:article_list' %}">光影</a>
             </li>
-            <li class="nav-item">
-                 <a class="nav-link" href="#">Videos</a>
-            </li>
+
+
+
             <li class="nav-item">
                  {% if user.is_authenticated %}
             <div class="btn-group">
@@ -35,8 +46,8 @@
           </li>
           {% endif %}
             </li>
-
         </ul>
+
     </div>
 
 </nav>
