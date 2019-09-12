@@ -1,0 +1,63 @@
+{% load staticfiles %}
+{% load article_extras %}
+<!DOCTYPE html>
+<!-- 网站主语言 -->
+<html lang="zh-cn">
+
+<head>
+    <!-- 网站采用的字符编码 -->
+    <meta charset="utf-8">
+    <!-- 预留网站标题的位置 -->
+    <title>{% block title %}{% endblock %}</title>
+    <!-- 引入bootstrap的css文件 -->
+     <script src="https://kit.fontawesome.com/38b2ba9329.js"></script>
+    <!-- 新 Bootstrap4 核心 CSS 文件 -->
+     <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.3.1/css/bootstrap.min.css">
+     <link rel="stylesheet" href="{% static 'md_css/monokai.css' %}">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+</head>
+{%  include 'header.html' %}
+{% load staticfiles %}
+
+{% load highlight %}
+
+
+
+<style>
+    span.highlighted{ color: #ff0000;}
+
+    .col-center-lock{
+        float:none;
+        display:block;
+        margin:0 auto;
+        /* margin-left:auto;margin-right:auto;*/
+    }
+</style>
+
+<div class="container">
+            <div class="card-body ">
+                <a class="card-title  text-secondary disabled">当前搜索：{{query}}</a>
+                {% for result in page.object_list %}
+                <p class="card-text">
+                    <a href="{% url 'article:article_detail' result.object.pk %}">{{result.object.title}}</a>
+                    <br>
+                            <span><i class="fas fa-clock bg " style="color: pink;"></i>{{ result.object.created|timesince_zh }}</span>
+                            <span><i class="fas fa-comments " style="color: yellowgreen;"></i><!-- 修改为评论的计数 -->{{ result.object.comments.count }}&nbsp;&nbsp;&nbsp;</span>
+                            <span><i class="fas fa-eye " style="color: lightskyblue;"></i>{{ result.object.total_views }}&nbsp;&nbsp;&nbsp;</span>
+                    <br>
+                    {% with result.object.body|safe as body %}
+                    <span>{% highlight body with query %}</span>
+                    {% endwith %}
+                </p>
+                {% empty %}
+
+                <h3>NONE</h3>
+                {% endfor %}
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+{% include 'footer.html' %}
