@@ -28,5 +28,6 @@ urlpatterns = [
     path('accounts/',include('allauth.urls')),
     path('comment/',include('comment.urls',namespace='comment')),
     path('ckeditor/',include('ckeditor_uploader.urls')),
+    path('pciture/',include('picture.urls',namespace='picture')),
 ]
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

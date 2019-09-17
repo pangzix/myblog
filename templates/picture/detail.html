@@ -1,0 +1,21 @@
+<!-- extends表明此页面继承自 base.html 文件 -->
+{% extends "base.html" %}
+
+<!-- 写入 base.html 中定义的 title -->
+{% block title %}
+
+{% endblock title %}
+
+<!-- 写入 base.html 中定义的 content -->
+{% block content %}
+
+<!-- 文章详情 -->
+<div class="card" style="width: 18rem;">
+  <img src="{{ picture.image }}" class="card-img-bottom" >
+  <div class="card-body">
+    <h2 class="card-text">{{ picture.title }}</h2>
+  </div>
+</div>
+
+
+{% endblock content %}

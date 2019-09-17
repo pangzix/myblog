@@ -57,6 +57,8 @@ INSTALLED_APPS = [
     'ckeditor_uploader',
 
     'haystack',
+
+    'picture',
 ]
 
 HAYSTACK_CONNECTIONS = {
@@ -224,3 +226,7 @@ CKEDITOR_CONFIGS = {
     }
 }
 
+COS_SECRET_ID='AKIDMpV5UnQqkaIoBQDR7byGQShkgchgGvnU'
+COS_SECRET_KEY='fDPpVTPBtkZcVYUKWku5aAnOufYTPH8w'
+REGION='ap-shanghai'
+BUCKET='lesphon-1252495278'
