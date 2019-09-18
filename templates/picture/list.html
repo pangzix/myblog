@@ -12,39 +12,37 @@
 
 <!-- 定义放置文章标题的div容器 -->
 
-    <div class="container">
-        {% for picture in pictures %}
-
-    <div class="row mt-3">
+<div class="container">
+    <div class="row mt-4">
         <div class="card-columns">
-        <div class="card hvr-glow" style="width: 18rem;">
-            <a href="javascript:" data-toggle="modal" data-target="#img{{ picture.id }}" class="card-link text-muted">
-        <div style="overflow: hidden">
-            <img src="{{ picture.image }}" class="card-img-top hvr-grow" >
-        </div>
-     <div class="card-body">
-        <h2 class="card-text">{{ picture.title }}</a></h2>
+                {% for picture in pictures %}
+            <div class="card hvr-glow" style="width: 18rem;">
+             <a href="javascript:" data-toggle="modal" data-target="#img{{ picture.id }}" class="card-link text-muted">
+                <div style="overflow: hidden">
+                    <img src="{{ picture.image }}" class="card-img-top hvr-grow" >
+                </div>
+                <div class="card-body">
+                    <h2 class="card-text">{{ picture.title }}</a></h2>
+                </div>
+            </div>
 
-    </div>
 
-</div>
-        </div>
+
 <!-- 模态框 -->
-<div class="modal fade" id="img{{ picture.id }}">
-  <div class="modal-dialog">
-    <div class="modal-content">
-
+        <div class="modal fade" id="img{{ picture.id }}">
+            <div class="modal-dialog">
+                <div class="modal-content">
       <!-- 模态框主体 -->
-      <div class="modal-body">
-        <img src="{{ picture.image }}" class="card-img-top " >
-      </div>
-
-
-    </div>
-  </div>
-</div>
+                    <div class="modal-body">
+                        <img src="{{ picture.image }}" class="card-img-top " >
+                    </div>
+                </div>
+             </div>
+        </div>
+        {% endfor %}
+     </div>
  </div>
-    {% endfor %}
+
 
 
 
