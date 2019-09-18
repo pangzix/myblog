@@ -11,10 +11,12 @@
 {% block content %}
 
 <!-- 定义放置文章标题的div容器 -->
+
     <div class="container">
+        {% for picture in pictures %}
+
     <div class="row mt-3">
-    <div class="card-columns">
-    {% for picture in pictures %}
+        <div class="card-columns">
         <div class="card hvr-glow" style="width: 18rem;">
             <a href="javascript:" data-toggle="modal" data-target="#img{{ picture.id }}" class="card-link text-muted">
         <div style="overflow: hidden">
@@ -41,10 +43,10 @@
     </div>
   </div>
 </div>
-
+ </div>
     {% endfor %}
 
-    </div>
+
 
 
 
