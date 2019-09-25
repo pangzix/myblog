@@ -4,7 +4,7 @@
 {% load article_extras %}
 <!-- 写入 base.html 中定义的 title -->
 {% block title %}
-    首页
+    文字
 {% endblock title %}
 
 <!-- 写入 base.html 中定义的 content -->
@@ -15,28 +15,20 @@
 <div class="container">
 
     <d class="row mt-2">
-
+        <div class="col-12">
         {% for article in articles %}
-            <div class="col-12">
 
-       {% if article.column %}
-            <button type="button"
-             class="btn btn-sm mb-2 btn-dark
 
-                    ">
-            {{ article.column }}
-            </button>
+            {% if article.column %}
+            <button type="button" class="btn btn-sm mb-2 btn-dark">{{ article.column }}</button>
             {% endif %}
 
             <span>
-            {% for tag in article.tags.all %}
-                <a href="{% url 'article:article_list' %}?tag={{ tag }}"
-                   class="badge badge-secondary"
-                   >
-                {{ tag }}
-                </a>
+                {% for tag in article.tags.all %}
+                    <a href="{% url 'article:article_list' %}?tag={{ tag }}" class="badge badge-secondary">{{ tag }}</a>
                 {% endfor %}
             </span>
+
             <h4>
             <b>
                 <a href="{% url 'article:article_detail' article.id %}" style="color: black;">
@@ -54,10 +46,10 @@
             {{ article.total_views }}&nbsp;&nbsp;&nbsp;
             </span>
               <span>
-        <i class="fas fa-comments" style="color: yellowgreen;"></i>
-        <!-- 修改为评论的计数 -->
-        {{ article.comments.count }}&nbsp;&nbsp;&nbsp;
-    </span>
+            <i class="fas fa-comments" style="color: yellowgreen;"></i>
+            <!-- 修改为评论的计数 -->
+            {{ article.comments.count }}&nbsp;&nbsp;&nbsp;
+            </span>
             <span>
                 <i class="fas fa-clock" style="color: pink;"></i>
             {{ article.created|timesince_zh }}
@@ -72,4 +64,44 @@
 
 
 </div>
+
+    <div class="pagination row ">
+    <div class="m-auto ">
+        <span class="step-links  center-block">
+            <!-- 如果不是第一页，则显示上翻按钮 -->
+            {% if articles.has_previous %}
+                <a href="?page=1" class="btn btn-default">
+                    &laquo; 1
+                </a>
+                <span>...</span>
+                <a href="?page={{ articles.previous_page_number }}"
+                   class="btn btn-default"
+                >
+                    {{ articles.previous_page_number }}
+                </a>
+            {% endif %}
+
+            <!-- 当前页面 -->
+            <span class="current btn btn-default">
+                {{ articles.number }}
+            </span>
+
+            <!-- 如果不是最末页，则显示下翻按钮 -->
+            {% if articles.has_next %}
+                <a href="?page={{ articles.next_page_number }}"
+                   class="btn btn-default"
+                >
+                    {{ articles.next_page_number }}
+                </a>
+                <span>...</span>
+                <a href="?page={{ articles.paginator.num_pages }}"
+                   class="btn btn-default"
+                >
+                    {{ articles.paginator.num_pages }} &raquo;
+                </a>
+            {% endif %}
+        </span>
+    </div>
+</div>
+
     {% endblock content %}

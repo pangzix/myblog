@@ -18,17 +18,20 @@ class TimelineView(generic.ListView):
     context_object_name = 'timeline_list'
 
 def index_view(request):
-    articles = ArticlePost.objects.all()
+    article_list = ArticlePost.objects.all()
+    paginator = Paginator(article_list, 5)
+    page = request.GET.get('page')
+    articles = paginator.get_page(page)
     comments = Comment.objects.all()
-    return render(request,'article/index.html',{'ariticle_list':articles,'comments':comments})  # 返回给index用于显示
+    return render(request,'article/index.html',{'articles':articles,'comments':comments})  # 返回给index用于显示
 
 def article_list(request):
 
     article_list = ArticlePost.objects.all()
-    paginator = Paginator(article_list,1)
+    paginator = Paginator(article_list,5)
     page = request.GET.get('page')
     articles = paginator.get_page(page)
-    context = {'articles':article_list}
+    context = {'articles':articles}
     return render(request,'article/list.html',context)
 
 def article_detail(request,id):

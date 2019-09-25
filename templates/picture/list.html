@@ -2,6 +2,8 @@
 {% extends "base.html" %}
 {% load staticfiles %}
 {% load article_extras %}
+<script src="{% static 'bootstrap/js/jquery.eeyellow.Timeline.js' %}"></script>
+<link rel="stylesheet" href="{% static 'timeline/jquery.eeyellow.Timeline.css' %}"
 <!-- 写入 base.html 中定义的 title -->
 {% block title %}
     光影
@@ -11,9 +13,10 @@
 {% block content %}
 
 <!-- 定义放置文章标题的div容器 -->
+<body style="padding-top: 70px ">
+<div class="container m-5 text-center">
+    <div class="row mt-4 ">
 
-<div class="container m-auto">
-    <div class="row mt-4 m-auto">
         <div class="card-columns">
                 {% for picture in pictures %}
             <div class="card hvr-glow" style="width: 18rem;">
@@ -40,6 +43,7 @@
              </div>
         </div>
         {% endfor %}
+
      </div>
  </div>
 
