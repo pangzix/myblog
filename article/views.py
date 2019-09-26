@@ -46,7 +46,7 @@ def article_detail(request,id):
     article.total_views += 1
     article.save(update_fields=['total_views'])
     comment_form = CommentForm()
-    context = {'articles':article,'comment':comments,'comment_form':comment_form,}
+    context = {'article':article,'comments':comments,'comment_form':comment_form,}
 
     return render(request,'article/detail.html',context)
 

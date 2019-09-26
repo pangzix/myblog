@@ -6,29 +6,33 @@
     文章详情
 {% endblock title %}
 
+ <body style="padding-top: 70px;padding-bottom: 70px;">
 <!-- 写入 base.html 中定义的 content -->
 {% block content %}
 
 <!-- 文章详情 -->
 <div class="container">
     <div class="row">
-        <!-- 标题及作者 -->
-        <h1 class="col-12 mt-4 mb-4">{{ articles.title }}</h1>
-        <div class="col-12 alert alert-success">作者：{{ articles.author }}
-        ·<a href="{% url "article:article_delete" articles.id %}">删除文章</a>
-            · <a href="{% url "article:article_update" articles.id %}">编辑文章</a>
-        </div>
-
+    <article class="blog-post col-12">
+    <h1 class="top-gap-0">{{ article.title }}</h1>
+          <div class="blog-entry-meta">
+            <time title="{{ article.created|date:'Y-m-d H:i:s' }}"><i class="far fa-clock" style="color:darkgray"></i>{{ article.created|date:'Y-m-d' }}</time>&nbsp;
+            <span><i class="fas fa-eye" style="color: darkgrey;"></i>{{ article.total_views }}阅读</span>&nbsp;
+              <a href="#comment-area" class="text-secondary"><i class="fas fa-comments" style="color: darkgrey;"></i>{{ article.comments.count }}评论</a>
+    </div>
         <!-- 文章正文 -->
         <div class="col-12">
-            <p>{{ articles.body|safe }}</p>
+            <p>{{ article.body|safe }}</p>
         </div>
 
+    </article>
 
+
+    <section class="comment-area top-gap-big" id="comment-area">
         <hr>
         {% if user.is_authenticated %}
         <div>
-            <form action="{% url 'comment:post_comment' articles.id %}" method='POST'>
+            <form action="{% url 'comment:post_comment' article.id %}" method='POST'>
                 {% csrf_token %}
                 <div class="form-group">
                     <label for="body">
@@ -40,43 +44,119 @@
                         {{ comment_form.media }}
                         {{ comment_form.body }}
         </div>
-                <button type="submit" class="btn btn-secondary">确定</button>
+                    <br>
+                <button type="submit" class="btn btn-secondary">发布</button>
             </form>
     </div>
         <br>
         {% else %}
         <br>
-        <h5 class="row justify-content-center">
-            <a href="{% url 'userprofile:login' %}">登陆</a>
+        <h5 class="row justify-content-center glyphicon-text-size">
+            登陆以回复:<a href="{% url 'userprofile:login' %}"><i class="fab fa-facebook-square text-secondary"></i></a>
         </h5>
-        <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
         {% endif %}
+            <br>&nbsp;
 
-    <h4 >{{ comment.count }}条评论</h4>
-    <div>
-        {% for comment in comment %}
-        <hr>
-        <p>
-            <strong style="color: pink">
-                {{ comment.user }}
-            </strong>于
-            <span style="color: green">
-                {{ comment.created | date:"Y-m-d H:i:s" }}
-            </span>时说：
-        </p>
-        <pre style="font-family: inherit;font-size:1em; ">
-            {{ comment.body|safe }}
-        </pre>
-        {% endfor %}
+    {% load mptt_tags %}
+    <h4 >{{ comments.count }}条评论</h4>
+    <div class="row">
+        {% recursetree comments %}
+            {% with comment=node %}
+                <div class="{% if comment.reply_to %}
+                            offset-1 col-11
+                            {% else %}
+                            col-12
+                            {% endif %}"
+                     >
+
+                        <hr>
+                        <p>
+                            <strong style="color:gray">
+                                {{ comment.user }}
+                            </strong>
+
+                            {% if comment.reply_to %}
+                                <i class="far fa-arrow-alt-circle-right"
+                                   style="color:cornflowerblue;"
+                                   ></i>
+                                <strong style="color:gray">
+                                    {{ comment.reply_to }}
+                                </strong>
+                            {% endif %}
+                        </p>
+                        <div>{{ comment.body|safe }}</div>
+                    <div>
+                        <span style="color: gray">
+                            {{ comment.created|date:"Y-m-d H:i" }}
+                        </span>
+
+                        {% if user.is_authenticated %}
+                        <button type="button"
+                                class="btn btn-light btn-sm text-muted"
+                                onclick="load_modal({{ article.id }},{{ comment.id }})"
+                                >
+                            回复
+                        </button>
+                        {% else %}
+                        <a class="btn btn-light btn-sm text-muted"
+                           href="{% url 'userprofile:login' %}"
+                           >
+                            回复
+                        </a>
+                        {% endif %}
+                    </div>
+
+                    <div class="modal fade" id="comment_{{ comment.id }}" tabindex="-1" role="dialog" aria-labelledby="CommentModalCenter" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+                            <div class="modal-content" style="height: 480px;">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalCenterTitle">回复{{ comment.user }}:</h5>
+                                </div>
+                                <div class="modal-body" id="modal_body_{{ comment.id }}"></div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                {% if not comment.is_leaf_node %}
+
+                    <div class="children">
+                        {{ children }}
+                    </div>
+                {% endif %}
+                </div>
+    {% endwith %}
+    {% endrecursetree %}
     </div>
-</div>
+
 
 {% block script %}
     <script>
     $(".django-ckeditor-widget").removeAttr('style');
     </script>
+
+    <script>
+ function load_modal(article_id, comment_id) {
+    let modal_body = '#modal_body_' + comment_id;
+    let modal_id = '#comment_' + comment_id;
+
+    // 加载编辑器
+    if ($(modal_body).children().length === 0) {
+        let content = '<iframe src="/comment/post-comment/' +
+            article_id +
+            '/' +
+            comment_id +
+            '" frameborder="0" style="width: 100%; height: 100%;"></iframe>';
+        $(modal_body).append(content);
+    };
+
+    $(modal_id).modal('show');
+}
+
+    </script>
 {% endblock script %}
 
 
 {% endblock content %}
-
+ </body>

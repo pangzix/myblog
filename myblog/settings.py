@@ -59,6 +59,8 @@ INSTALLED_APPS = [
     'haystack',
 
     'picture',
+
+    'mptt',
 ]
 
 HAYSTACK_CONNECTIONS = {
