@@ -1,9 +1,9 @@
 <div class="widget widget-recent-posts">
-  <h3 class="widget-title recent-post">最新文章</h3>
+  <h3 class="widget-title ">最新文章</h3>
   <ul>
     {% for article in recent_article_list %}
-      <li>
-        <a   class=" hvr-forward no-underline recent-post__title" href="{{ article.get_absolute_url }}">{{ article.title }}</a>
+      <li class="widget_recent_comments">
+        <a   class=" hvr-forward  recent-post__title" href="{{ article.get_absolute_url }}">{{ article.title }}</a>
       </li>
     {% empty %}
       暂无文章！

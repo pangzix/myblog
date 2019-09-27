@@ -33,8 +33,8 @@
                                     <span>{{ article.created|timesince_zh }}</span>
 
 
-                                <h4 class="mt-0">
-                                <a class="text-secondary hvr-forward no-underline blog-detail-title"   href="{% url 'article:article_detail' article.pk %}">{{ article.title }}</a>
+                                <h4 class="blog-post__title">
+                                <a class="text-secondary no-underline blog-post__title"   href="{% url 'article:article_detail' article.pk %}">{{ article.title }}</a>
                             </h4>
                             <p class="f-15 blog-meta__post-by">{{ article.excerpt|safe }}...</p>
                         </div>
