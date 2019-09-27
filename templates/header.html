@@ -28,7 +28,7 @@ $(document).ready(function(){
 <nav class="navbar navbar-expand-md navbar-light  fixed-top" >
 
     <!-- 导航栏商标 -->
-    <a class="navbar-brand btn-default hvr-round-corners border-0  text-black-50" href="{% url 'index_url' %}">我的笔记本</a>
+    <a class="navbar-brand btn-default hvr-round-corners border-0  header-humberger-icon" href="{% url 'index_url' %}">Lesphon</a>
 
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
     <span class="navbar-toggler-icon"></span>
@@ -38,7 +38,7 @@ $(document).ready(function(){
 
                     <form class="nav-item navbar-form mr-2 py-md-2 " role="search" method="get" id="searchform" action="{% url 'article:haystack_search' %}">
                     <div class="input-group">
-                        <input type="text" name="q" class="form-control  bg-transparent border border-secondary" placeholder="搜索" autocomplete="off" required=True>
+                        <input type="text" name="q" class="form-control  bg-transparent border " placeholder="搜索" autocomplete="off" required=True>
                         <div class="input-group-btn">
                             <button class="btn btn-default hvr-icon-fade " type="submit"><i class="fa fa-search bg hvr-icon text-black-50"></i></button>
                         </div>

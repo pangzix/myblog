@@ -12,18 +12,18 @@
 {% block content %}
 
 <!-- 文章详情 -->
-<div class="container">
+<div class="container ">
     <div class="row">
-    <article class="blog-post col-12">
-    <h1 class="top-gap-0">{{ article.title }}</h1>
-          <div class="blog-entry-meta">
-            <time title="{{ article.created|date:'Y-m-d H:i:s' }}"><i class="far fa-clock" style="color:darkgray"></i>{{ article.created|date:'Y-m-d' }}</time>&nbsp;
-            <span><i class="fas fa-eye" style="color: darkgrey;"></i>{{ article.total_views }}阅读</span>&nbsp;
-              <a href="#comment-area" class="text-secondary"><i class="fas fa-comments" style="color: darkgrey;"></i>{{ article.comments.count }}评论</a>
-    </div>
+    <article class="blog-post col-12 shadow p-3 md-5 bg-white">
+    <h1 class="top-gap-0 blog-detail-title">{{ article.title }}</h1>
+           <span class="blog-meta__date">{{ article.created }}&nbsp;&nbsp;</span>
+            <span class="blog-meta__separator">|</span>
+            <span class="blog-meta__comments"></i><!-- 修改为评论的计数 -->{{ article.comments.count }}&nbsp;&nbsp;comments</span>
+            <span class="blog-meta__separator">|</span>
+            <span class="blog-meta__post-by">by {{ article.author }}</span>
         <!-- 文章正文 -->
         <div class="col-12">
-            <p>{{ article.body|safe }}</p>
+            <p class="blog-details-text">{{ article.body|safe }}</p>
         </div>
 
     </article>
