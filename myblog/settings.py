@@ -46,8 +46,6 @@ INSTALLED_APPS = [
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
-    'allauth.socialaccount.providers.weibo',
-    'allauth.socialaccount.providers.github',
 
     'crispy_forms',
 
@@ -64,21 +62,7 @@ INSTALLED_APPS = [
 
     'mptt',
 
-    'xadmin',
 ]
-
-SITE_ID =1
-
-LOGIN_REDIRECT_URL = '/'
-#作用是登陆时可以用用户名也可以用邮箱
-#ACCOUNT_AUTHENTICATION_METHOD = 'username_email'
-#作用时注册时，邮箱是必备的。
-ACCOUNT_EMAIL_REQUIRED = True
-#禁用注册邮箱验证
-ACCOUNT_EMAIL_VERIFICATION='none'
-#登出直接退出，不用确认
-ACCOUNT_LOGOUT_ON_GET=True
-
 
 HAYSTACK_CONNECTIONS = {
     'default':{
@@ -93,8 +77,15 @@ HAYSTACK_SIGNAL_PROCESSOR = 'haystack.signals.RealtimeSignalProcessor'
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
-
-
+SITE_ID =1
+#作用是登陆时可以用用户名也可以用邮箱
+#ACCOUNT_AUTHENTICATION_METHOD = 'username_email'
+#作用时注册时，邮箱是必备的。
+ACCOUNT_EMAIL_REQUIRED = True
+#禁用注册邮箱验证
+ACCOUNT_EMAIL_VERIFICATION='none'
+#登出直接退出，不用确认
+ACCOUNT_LOGOUT_ON_GET=True
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
