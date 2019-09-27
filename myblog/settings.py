@@ -63,6 +63,8 @@ INSTALLED_APPS = [
     'picture',
 
     'mptt',
+
+    'xadmin',
 ]
 
 SITE_ID =1
