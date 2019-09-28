@@ -63,7 +63,7 @@ $(document).ready(function(){
           </button>
                <div class="dropdown-menu " aria-label="dropdownMenuButton">
             <a class="dropdown-item" href="{% url 'article:article_create' %}">发布</a>
-            <a class="dropdown-item" href="{% url 'userprofile:logout' %}">退出</a>
+            <a class="dropdown-item" href="{% url 'account_logout' %}">退出</a>
           </div>
         </div>
                      {% elif user.is_authenticated %}
@@ -73,12 +73,12 @@ $(document).ready(function(){
            <span class="sr-only">Toggle Dropdown</span>
           </button>
                <div class="dropdown-menu" aria-label="dropdownMenuButton">
-            <a class="dropdown-item" href="{% url 'userprofile:logout' %}">退出</a>
+            <a class="dropdown-item" href="{% url 'account_logout' %}">退出</a>
           </div>
         </div>
        {% else %}
           <li class="nav-item">
-              <a class="nav-link" href="{% url 'userprofile:login' %}"><i class="fas fa-sign-in-alt text-secondary"></i></a>
+              <a class="nav-link" href="{% url 'account_login' %}"><i class="fas fa-sign-in-alt text-secondary"></i></a>
           </li>
           {% endif %}
             </li>

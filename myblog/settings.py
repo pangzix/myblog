@@ -46,6 +46,8 @@ INSTALLED_APPS = [
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
+    'allauth.socialaccount.providers.github',
+    'allauth.socialaccount.providers.weibo',
 
     'crispy_forms',
 
@@ -64,6 +66,8 @@ INSTALLED_APPS = [
 
 ]
 
+
+
 HAYSTACK_CONNECTIONS = {
     'default':{
         # 'ENGINE': 'haystack.backends.whoosh_backend.WhooshEngine'，
@@ -77,7 +81,9 @@ HAYSTACK_SIGNAL_PROCESSOR = 'haystack.signals.RealtimeSignalProcessor'
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
-SITE_ID =1
+SITE_ID =2
+
+LOGIN_REDIRECT_URL = '/'
 #作用是登陆时可以用用户名也可以用邮箱
 #ACCOUNT_AUTHENTICATION_METHOD = 'username_email'
 #作用时注册时，邮箱是必备的。
