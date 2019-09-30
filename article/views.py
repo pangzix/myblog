@@ -3,7 +3,7 @@ from .models import ArticlePost,Timeline
 from django.http import HttpResponse
 from .forms import ArticlePostForm
 from django.contrib.auth.models import User
-from django.contrib.auth.decorators import login_required
+from django.contrib.auth.decorators import login_required,permission_required
 from django.core.paginator import Paginator
 from comment.models import Comment
 from comment.forms import CommentForm
@@ -50,7 +50,7 @@ def article_detail(request,id):
 
     return render(request,'article/detail.html',context)
 
-@login_required(login_url='userprofile/login/')
+@permission_required('article.can_add_article_post')
 def article_create(request):
     if request.method == "POST":
         article_post_form = ArticlePostForm(data=request.POST)
@@ -67,7 +67,7 @@ def article_create(request):
         context = {'article_post_form':article_post_form}
         return render(request,'article/create.html',context)
 
-@login_required(login_url='/userprofile/login/')
+@permission_required('article.can_delete_article_post')
 def article_delete(request,id):
     article = ArticlePost.objects.get(id=id)
     if request.user != article.author:
@@ -75,7 +75,7 @@ def article_delete(request,id):
     article.delete()
     return redirect("article:article_list")
 
-@login_required(login_url='/userprofile/login/')
+@permission_required('article.can_change_article_post')
 def article_update(request, id):
     """
     更新文章的视图函数

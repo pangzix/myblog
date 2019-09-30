@@ -51,7 +51,9 @@ $(document).ready(function(){
             <li class="nav-item">
                  <a class="nav-link" href="{% url 'picture:picture_list' %}">光影</a>
             </li>
-
+            <li class="nav-item">
+                 <a class="nav-link" href="{% url 'index_url' %}">关于</a>
+            </li>
 
 
             <li class="nav-item">
@@ -64,7 +66,7 @@ $(document).ready(function(){
                <div class="dropdown-menu " aria-label="dropdownMenuButton">
             <a class="dropdown-item" href="{% url 'article:article_create' %}">发布</a>
             <a class="dropdown-item" href="{% url 'account_logout' %}">退出</a>
-          </div>
+               </div>
         </div>
                      {% elif user.is_authenticated %}
             <div class="btn-group">
