@@ -12,12 +12,11 @@
 <!-- 写入 base.html 中定义的 content -->
 {% block content %}
 
-<!-- 定义放置文章标题的div容器 -->
-<body style="padding-top: 70px ">
-<div class="container m-5 text-center shadow p-3 md-5 bg-white">
-    <div class="row mt-4 ">
+<!-- 定义放置的div容器 -->
+<div class="container  shadow p-3 md-5 bg-white">
+    <div class="row ">
 
-        <div class="card-columns">
+        <div class="card-columns col text-center">
                 {% for picture in pictures %}
             <div class="card hvr-glow" style="width: 18rem;">
              <a href="javascript:" data-toggle="modal" data-target="#img{{ picture.id }}" class="card-link text-muted">
