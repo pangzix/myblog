@@ -81,7 +81,7 @@ HAYSTACK_SIGNAL_PROCESSOR = 'haystack.signals.RealtimeSignalProcessor'
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
-SITE_ID =2
+SITE_ID =1
 
 LOGIN_REDIRECT_URL = '/'
 #作用是登陆时可以用用户名也可以用邮箱
@@ -189,15 +189,15 @@ CKEDITOR_UPLOAD_PATH ='ckeditor_upload'
 # SMTP服务器，改为你的邮箱的smtp!
 EMAIL_HOST = 'smtp.qq.com'
 # 改为你自己的邮箱名！
-EMAIL_HOST_USER = 'your_email_account@xxx.com'
+EMAIL_HOST_USER = '823770059@qq.com'
 # 你的邮箱密码
-EMAIL_HOST_PASSWORD = 'your_password'
+EMAIL_HOST_PASSWORD = 'egsfzmxwicrlbcib'
 # 发送邮件的端口
 EMAIL_PORT = 25
 # 是否使用 TLS
 EMAIL_USE_TLS = True
 # 默认的发件人
-DEFAULT_FROM_EMAIL = 'xxx的博客 <your_email_account@xxx.com>'
+DEFAULT_FROM_EMAIL = 'Lesphon的blog <823770059@qq.com>'
 
 CKEDITOR_CONFIGS = {
     # django-ckeditor默认使用default配置
