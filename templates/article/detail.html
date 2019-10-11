@@ -14,7 +14,22 @@
 <!-- 文章详情 -->
 <div class="container ">
     <div class="row">
-    <article class="blog-post col-12 shadow p-3 md-5 bg-white">
+    <!-- 新增的目录 -->
+    {% if article.toc %}
+        <div class="col-3 mt-4">
+            <h4><strong>目录</strong></h4>
+            <hr>
+            <div>
+                {{ toc|safe }}
+            </div>
+        </div>
+    {% endif %}
+    <article class="{% if article.toc %}
+                     blog-post col-9 shadow p-3 md-5 bg-white
+                    {% else %}
+                     blog-post col-12 shadow p-3 md-5 bg-white
+                    {% endif %}"
+                    >
     <h1 class="top-gap-0 blog-detail-title">{{ article.title }}</h1>
            <span class="blog-meta__date">{{ article.created }}&nbsp;&nbsp;</span>
             <span class="blog-meta__separator">|</span>

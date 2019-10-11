@@ -9,6 +9,10 @@ from comment.models import Comment
 from comment.forms import CommentForm
 import markdown
 from django.views import generic
+from markdown.extensions.toc import TocExtension
+from django.utils.text import slugify
+import re
+
 # Create your views here.
 
 
@@ -37,16 +41,18 @@ def article_list(request):
 def article_detail(request,id):
     article = ArticlePost.objects.get(id=id)
     comments = Comment.objects.filter(article=id)
-    article.body = markdown.markdown(article.body,
-                                     extensions=[
-                                         'markdown.extensions.extra',
-                                         'markdown.extensions.codehilite',
-                                         'markdown.extensions.toc',
-                                     ])
+    md=markdown.Markdown(extensions=[
+        'markdown.extensions.extra',
+        'markdown.extensions.codehilite',
+        TocExtension(slugify=slugify),
+    ])
+    article.body = md.convert(article.body)
+    m = re.search(r'<div class="toc">\s*<ul>(.*)</ul>\s*</div>', md.toc, re.S)
+    article.toc = m.group(1) if m is not None else ''
     article.total_views += 1
     article.save(update_fields=['total_views'])
     comment_form = CommentForm()
-    context = {'article':article,'comments':comments,'comment_form':comment_form,}
+    context = {'article':article,'comments':comments,'comment_form':comment_form,'toc':md.toc}
 
     return render(request,'article/detail.html',context)
 
