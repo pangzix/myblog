@@ -13,58 +13,55 @@
 <!-- 定义放置文章标题的div容器 -->
 <div class="container">
 
-    <d class="row mt-2">
+    <div class="row ">
         <div class="col-12">
-        {% for article in articles %}
+            {% for article in articles %}
 
 
-            {% if article.column %}
-            <button type="button" class="btn btn-sm mb-2 btn-dark">{{ article.column }}</button>
-            {% endif %}
+                {% if article.column %}
+                    <button type="button" class="btn btn-sm mb-2 btn-dark">{{ article.column }}</button>
+                {% endif %}
 
-            <span>
-                {% for tag in article.tags.all %}
-                    <a href="{% url 'article:article_list' %}?tag={{ tag }}" class="badge badge-secondary">{{ tag }}</a>
-                {% endfor %}
-            </span>
+                    <span>
+                     {% for tag in article.tags.all %}
+                        <a href="{% url 'article:article_list' %}?tag={{ tag }}" class="badge badge-secondary">{{ tag }}</a>
+                     {% endfor %}
+                    </span>
 
-            <h4>
-            <b>
-                <a href="{% url 'article:article_detail' article.id %}" style="color: black;">
-                    {{ article.title }}
-                </a>
-            </b>
-            </h4>
-            <div>
-            <p style="color: gray;">
-                {{ article.body|slice:'100' }}...
-            </p>
-                <p>
-            <span>
-                <i class="fas fa-eye" style="color: lightskyblue;"></i>
-            {{ article.total_views }}&nbsp;&nbsp;&nbsp;
-            </span>
-              <span>
-            <i class="fas fa-comments" style="color: yellowgreen;"></i>
-            <!-- 修改为评论的计数 -->
-            {{ article.comments.count }}&nbsp;&nbsp;&nbsp;
-            </span>
-            <span>
-                <i class="fas fa-clock" style="color: pink;"></i>
-            {{ article.created|timesince_zh }}
-            </span>
-                </p>
-            <hr>
-            </div>
+                    <h4>
+                        <b>
+                            <a href="{% url 'article:article_detail' article.id %}" style="color: black;">
+                                {{ article.title }}
+                            </a>
+                        </b>
+                    </h4>
 
-        {% endfor %}
+                    <p style="color: gray;">
+                        {{ article.body|slice:'100' }}...
+                     </p>
 
+                    <p>
+                        <span>
+                            <i class="fas fa-eye" style="color: lightskyblue;"></i>
+                            {{ article.total_views }}&nbsp;&nbsp;&nbsp;
+                        </span>
+                        <span>
+                            <i class="fas fa-comments" style="color: yellowgreen;"></i>
+                             <!-- 修改为评论的计数 -->
+                            {{ article.comments.count }}&nbsp;&nbsp;&nbsp;
+                        </span>
+                        <span>
+                            <i class="fas fa-clock" style="color: pink;"></i>
+                            {{ article.created|timesince_zh }}
+                        </span>
+                    </p>
+                    <hr>
 
-
-
+            {% endfor %}
+        </div>
+    </div>
 </div>
-
-  <div class="pagination row ">
+ <div class="pagination row ">
     <div class="m-auto ">
         <span class="step-links  center-block">
             <!-- 如果不是第一页，则显示上翻按钮 -->
@@ -101,6 +98,6 @@
         </span>
     </div>
 </div>
-    </d>
-</div>
+
 {% endblock content %}
+
