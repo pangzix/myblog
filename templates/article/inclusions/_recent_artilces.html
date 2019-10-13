@@ -1,12 +1,16 @@
 <div class="widget widget-recent-posts">
-  <h3 class="widget-title ">最新文章</h3>
-  <ul>
-    {% for article in recent_article_list %}
-      <li class="widget_recent_comments">
-        <a   class=" hvr-forward  recent-post__title" href="{{ article.get_absolute_url }}">{{ article.title }}</a>
-      </li>
-    {% empty %}
-      暂无文章！
-    {% endfor %}
-  </ul>
+    <div class="card" >
+        <div class="card-header">
+            最新文章
+        </div>
+    </div>
+    <ul class="list-group list-group-flush">
+        {% for article in recent_article_list %}
+        <li class="liswidget_recent_comments list-group-item border border-light ">
+            <a class=" hvr-forward  recent-post__title" href="{{ article.get_absolute_url }}">{{ article.title }}</a>
+         </li>
+        {% empty %}
+        暂无文章！
+        {% endfor %}
+     </ul>
 </div>
