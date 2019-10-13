@@ -5,7 +5,9 @@ from hashlib import sha1
 from django.conf import settings
 from django.core.files.storage import Storage
 from django.utils.deconstruct import deconstructible
+from datetime import datetime
 from qcloud_cos import CosConfig, CosS3Client
+
 
 secret_id = settings.COS_SECRET_ID
 secret_key = settings.COS_SECRET_KEY
@@ -41,10 +43,10 @@ class CosStorage(Storage):
         """
           给文件重命名
         """
-        file_name = str(int(time.time() * 10000000)) + ''.join([str(random.randint(1, 9)) for i in range(3)])
-        s = sha1()
-        s.update(file_name.encode('utf-8'))
-        file_name = str(s.hexdigest())
+        file_name = str(datetime.now())
+#        s = sha1()
+#        s.update(file_name.encode('utf-8'))
+#        file_name = str(s.hexdigest())
         key = file_name + '.' + suffix
         return key
 
