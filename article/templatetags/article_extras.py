@@ -12,6 +12,9 @@ def show_recent_articles(context, num=5):
         'recent_article_list': ArticlePost.objects.all().order_by('-created')[:num],
     }
 
+@register.inclusion_tag('article/inclusions/_contacting.html',takes_context=True)
+def show_contactings(context):
+    return
 
 #获取相对时间
 @register.filter(name='timesince_zh')
@@ -36,3 +39,5 @@ def time_since_zh(value):
 
     if diff.dasy >= 365:
         return str(math.floor(diff.days /365)) + '年前'
+
+
