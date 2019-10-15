@@ -16,6 +16,13 @@ def show_recent_articles(context, num=5):
 def show_contactings(context):
     return
 
+@register.inclusion_tag('article/inclusions/_archives.html', takes_context=True)
+def show_archives(context):
+    return {
+        'date_list': ArticlePost.objects.dates('created', 'month', order='DESC'),
+    }
+
+
 #获取相对时间
 @register.filter(name='timesince_zh')
 def time_since_zh(value):

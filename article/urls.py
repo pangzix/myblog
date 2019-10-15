@@ -14,4 +14,5 @@ urlpatterns = [
     path('',views.index_view,name='index_url'),
     path('timeline/',views.TimelineView,name='timeline'),
     path('search/',include('haystack.urls')),
+    path('archives/<int:year>/<int:month>/',views.archive,name='archive'),
 ]

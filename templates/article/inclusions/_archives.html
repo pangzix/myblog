@@ -1,0 +1,20 @@
+<div class="widget widget-recent-posts" >
+<div class="card hvr-glow d-flex  " >
+  <div class="card-header blog-meta__comments">
+    place on file
+  </div>
+    <ul class="list-group list-group-flush" style="overflow: auto;height: 10rem">
+
+
+        {% for date in date_list %}
+                   <li class="list-group-item">
+         <a href="{% url 'article:archive' date.year date.month %}" style="color: black;">
+                {{ date.year }} 年 {{ date.month }} 月
+         </a>
+                   </li>
+            {% endfor %}
+
+
+    </ul>
+</div>
+</div>

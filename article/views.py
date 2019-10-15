@@ -16,6 +16,13 @@ import re
 # Create your views here.
 
 
+def archive(request,year,month):
+    articles= ArticlePost.objects.filter(created__year=year,
+                                                  created__month=month
+                                                  )
+
+    return  render(request,'article/index.html',context={'articles':articles})
+
 class TimelineView(generic.ListView):
     model = Timeline
     template_name = 'article/timeline.html'
