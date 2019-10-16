@@ -11,6 +11,26 @@
 <!-- 写入 base.html 中定义的 content -->
 {% block content %}
 
+<script>
+    $(document).ready(function() {
+        // 如果toc为空（只有最外层ul），隐藏整个TOC并返回
+        if ($('.toc ul').children().length <= 0) {
+            $('.toc').parent().css('display', 'none');
+            return;
+        }
+
+        // 只显示1、2、3级目录列表
+        $('.toc ul li ul li ul li ul').css('display', 'none');
+        // 非默认的列表样式
+        $('.toc').find('ul').addClass('u-list-inline');
+        // 2、3级目录缩进
+        $('.toc ul li ul li').addClass('g-ml-15');
+        $('.toc ul li ul li ul li').addClass('g-ml-15');
+        // 链接颜色，鼠标悬停颜色
+        $('.toc').find('a').addClass('u-link-v5 g-color-aqua g-color-red--hover');
+    });
+</script>
+
 <!-- 文章详情 -->
 <div class="container ">
     <div class="row">
@@ -19,7 +39,7 @@
         <div class="col-3 mt-4">
             <h4><strong>目录</strong></h4>
             <hr>
-            <div>
+            <div class="markdown-body editormd-oreview-container">
                 {{ toc|safe }}
             </div>
         </div>
