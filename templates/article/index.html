@@ -69,24 +69,7 @@
                 <div class="no-article">aaa</div>
                 {% endfor %}
 
-            </div>
-
-
-
-            <aside class="col-md-4">
-                 {% show_recent_articles %}
-
-                {% show_contactings %}
-
-                {% show_archives %}
-            </aside>
-
-        </div>
-    </div>
-</div>
-
-
- <div class="pagination row ">
+                <div class="pagination row ">
     <div class="m-auto ">
         <span class="step-links  center-block">
             <!-- 如果不是第一页，则显示上翻按钮 -->
@@ -123,6 +106,20 @@
         </span>
     </div>
 </div>
+
+            </div>
+
+            <aside class="col-md-4">
+                 {% show_recent_articles %}
+
+                {% show_contactings %}
+
+                {% show_archives %}
+            </aside>
+        </div>
+    </div>
+</div>
+
 </div>
 
     {% include 'footer.html' %}
