@@ -39,7 +39,7 @@
         <div class="col-3 mt-4">
             <h4><strong>目录</strong></h4>
             <hr>
-            <div class="markdown-body editormd-oreview-container">
+            <div>
                 {{ toc|safe }}
             </div>
         </div>
@@ -88,7 +88,7 @@
         {% else %}
         <br>
         <h5 class="row justify-content-center glyphicon-text-size">
-            登陆以回复:<a href="{% url 'userprofile:login' %}"><i class="fab fa-facebook-square text-secondary"></i></a>
+            登陆以回复:<a href="{% url 'account_login' %}"><i class="fas fa-sign-in-alt"></i></a>
         </h5>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
         {% endif %}
