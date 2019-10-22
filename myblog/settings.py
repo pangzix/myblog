@@ -81,7 +81,7 @@ HAYSTACK_SIGNAL_PROCESSOR = 'haystack.signals.RealtimeSignalProcessor'
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
-SITE_ID =1
+SITE_ID =2
 
 LOGIN_REDIRECT_URL = '/'
 #作用是登陆时可以用用户名也可以用邮箱
@@ -235,3 +235,10 @@ COS_SECRET_ID='AKIDMpV5UnQqkaIoBQDR7byGQShkgchgGvnU'
 COS_SECRET_KEY='fDPpVTPBtkZcVYUKWku5aAnOufYTPH8w'
 REGION='ap-shanghai'
 BUCKET='lesphon-1252495278'
+
+QCLOUD_STORAGE_OPTION = {
+    'SecretId': 'AKIDMpV5UnQqkaIoBQDR7byGQShkgchgGvnU',
+    'SecretKey': 'fDPpVTPBtkZcVYUKWku5aAnOufYTPH8w',
+    'Region': 'ap-shanghai',
+    'Bucket': 'lesphon-1252495278',
+}
