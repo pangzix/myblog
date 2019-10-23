@@ -21,7 +21,7 @@ from article.views import index_view
 from django.views.generic.base import RedirectView
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
+    path('myblog/', admin.site.urls),
     path('',index_view,name='index_url'),
     path('article/',include('article.urls',namespace='article')),
     path('userprofile/',include('userprofile.urls',namespace='userprofile')),
