@@ -64,6 +64,8 @@ INSTALLED_APPS = [
 
     'mptt',
 
+    'axes',
+
 ]
 
 
@@ -100,6 +102,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'axes.middleware.AxesMiddleware',
 ]
 
 ROOT_URLCONF = 'myblog.urls'
@@ -231,7 +234,24 @@ CKEDITOR_CONFIGS = {
     }
 }
 
-COS_SECRET_ID='AKIDMpV5UnQqkaIoBQDR7byGQShkgchgGvnU'
-COS_SECRET_KEY='fDPpVTPBtkZcVYUKWku5aAnOufYTPH8w'
-REGION='ap-shanghai'
-BUCKET='lesphon-1252495278'
+
+QCLOUD_STORAGE_OPTION = {
+    'SecretId': 'AKIDMpV5UnQqkaIoBQDR7byGQShkgchgGvnU',
+    'SecretKey': 'fDPpVTPBtkZcVYUKWku5aAnOufYTPH8w',
+    'Region': 'ap-shanghai',
+    'Bucket': 'lesphon-1252495278',
+}
+
+AUTHENTICATION_BACKENDS = [
+    # AxesBackend should be the first backend in the AUTHENTICATION_BACKENDS list.
+    'axes.backends.AxesBackend',
+
+    # Django ModelBackend is the default authentication backend.
+    'django.contrib.auth.backends.ModelBackend',
+]
+
+#axes配置
+AXES_ENABLED= True
+AXES_ONLY_ADMIN_SITE = True
+AXES_ONLY_USER_FAILURES = True
+AXES_DISABLE_ACCESS_LOG = True
