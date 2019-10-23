@@ -7,11 +7,14 @@ dicttoxml==1.7.4
 diff-match-patch==20181111
 Django==2.2.4
 django-allauth==0.40.0
+django-appconf==1.0.3
+django-axes==5.0.18
 django-ckeditor==5.7.1
 django-crispy-forms==1.7.2
 django-formtools==2.1
 django-haystack==2.8.1
 django-import-export==1.2.0
+django-ipware==2.1.0
 django-js-asset==1.2.2
 django-mptt==0.10.0
 django-password-reset==2.0
