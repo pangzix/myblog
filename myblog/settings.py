@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/2.2/ref/settings/
 """
 
 import os
+import config
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -190,17 +191,17 @@ CKEDITOR_UPLOAD_PATH ='ckeditor_upload'
 
 
 # SMTP服务器，改为你的邮箱的smtp!
-EMAIL_HOST = 'smtp.qq.com'
+EMAIL_HOST = config.EMAIL_HOST
 # 改为你自己的邮箱名！
-EMAIL_HOST_USER = '823770059@qq.com'
+EMAIL_HOST_USER = config.EMAIL_HOST_USER
 # 你的邮箱密码
-EMAIL_HOST_PASSWORD = 'egsfzmxwicrlbcib'
+EMAIL_HOST_PASSWORD = config.EMAIL_HOST_PASSWORD
 # 发送邮件的端口
 EMAIL_PORT = 25
 # 是否使用 TLS
 EMAIL_USE_TLS = True
 # 默认的发件人
-DEFAULT_FROM_EMAIL = 'Lesphon的blog <823770059@qq.com>'
+DEFAULT_FROM_EMAIL = config.DEFAULT_FROM_EMAIL
 
 CKEDITOR_CONFIGS = {
     # django-ckeditor默认使用default配置
@@ -235,12 +236,7 @@ CKEDITOR_CONFIGS = {
 }
 
 
-QCLOUD_STORAGE_OPTION = {
-    'SecretId': 'AKIDMpV5UnQqkaIoBQDR7byGQShkgchgGvnU',
-    'SecretKey': 'fDPpVTPBtkZcVYUKWku5aAnOufYTPH8w',
-    'Region': 'ap-shanghai',
-    'Bucket': 'lesphon-1252495278',
-}
+
 
 AUTHENTICATION_BACKENDS = [
     # AxesBackend should be the first backend in the AUTHENTICATION_BACKENDS list.
@@ -255,3 +251,5 @@ AXES_ENABLED= True
 AXES_ONLY_ADMIN_SITE = True
 AXES_ONLY_USER_FAILURES = True
 AXES_DISABLE_ACCESS_LOG = True
+
+QCLOUD_STORAGE_OPTION = config.QCLOUD_STORAGE_OPTION
