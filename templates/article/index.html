@@ -69,44 +69,32 @@
                 <div class="no-article">aaa</div>
                 {% endfor %}
 
-                <div class="pagination row ">
-    <div class="m-auto ">
-        <span class="step-links  center-block">
-            <!-- 如果不是第一页，则显示上翻按钮 -->
-            {% if articles.has_previous %}
-                <a href="?page=1" class="btn btn-primary">
-                    &laquo; 1
-                </a>
-                <a href="?page={{ articles.previous_page_number }}"
-                   class="btn btn-secondary"
-                >
-                    {{ articles.previous_page_number }}
-                </a>
-            {% endif %}
-
-            <!-- 当前页面 -->
-            <span class="current btn btn-secondary">
-                {{ articles.number }}
-            </span>
-
-            <!-- 如果不是最末页，则显示下翻按钮 -->
-            {% if articles.has_next %}
-                <a href="?page={{ articles.next_page_number }}"
-                   class="btn btn-primary"
-                >
-                    {{ articles.next_page_number }}
-                </a>
-
-                <a href="?page={{ articles.paginator.num_pages }}"
-                   class="btn btn-secondary"
-                >
-                    {{ articles.paginator.num_pages }} &raquo;
-                </a>
-            {% endif %}
-        </span>
-    </div>
-</div>
-
+{% if articles.paginator.count > 5 %}
+<nav aria-label="Page navigation example">
+  <ul class="pagination justify-content-center">
+  <!-- 如果不是第一页，则显示上翻按钮 -->
+      {% if articles.has_previous %}
+         <li class="page-item">
+            <a class="page-link" href="?page=1" aria-label="Previous">
+             <span aria-hidden="true">&laquo;</span>
+            </a>
+        </li>
+        <li class="page-item"><a class="page-link" href="?page={{ articles.previous_page_number }}">{{ articles.previous_page_number }}</a></li>
+      {% endif %}
+<!--当前页 -->
+        <li class="page-item"><a class="page-link" href="#">{{ articles.number }}</a></li>
+  <!-- 如果不是最末页，则显示下翻按钮 -->
+    {% if articles.has_next %}
+        <li class="page-item">
+            <a class="page-link" href="?page={{ articles.next_page_number }}">{{ articles.next_page_number }}</a>
+        </li>
+        <li class="page-item">
+            <a class="page-link" href="?page={{ articles.paginator.num_pages }}"><span aria-hidden="true">&raquo;</span></a>
+        </li>
+  {% endif %}
+  </ul>
+</nav>
+{% endif %}
             </div>
 
             <aside class="col-md-4">
