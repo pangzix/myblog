@@ -9,6 +9,7 @@
     <meta charset="utf-8">
     <!-- 预留网站标题的位置 -->
     <title>{% block title %}{% endblock %}</title>
+
     <!-- 引入bootstrap的css文件 -->
      <script src="https://kit.fontawesome.com/38b2ba9329.js"></script>
     <script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
@@ -18,10 +19,17 @@
         <link rel="stylesheet" href="{% static 'hover/hover.css' %}">
     <link rel="stylesheet" href="{% static 'wpxon-blog/myblog.css' %}">
     <link rel="stylesheet" href="{% static 'markdown/toc.css' %}">
+    <link rel="stylesheet" href="{% static 'particles/css/style.css' %}">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 </head>
 
  <body  style="padding-top: 80px; background-color: whitesmoke" >
+
+ <!-- 粒子插件-->
+ <div id="particles-js"></div>
+ <script src="{% static 'particles/js/particles.js'%}"></script>
+     <script src="{% static 'particles/js/app.js' %}"></script>
+
 
     <!-- 引入导航栏 -->
     {% include 'header.html' %}
