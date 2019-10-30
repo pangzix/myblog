@@ -50,9 +50,13 @@
             <div class="col-md-8">
             <!--普通文章显示-->
                 {% for article in articles %}
+
                 <div class="card mb-2 hvr-glow shadow p-3 md-5 bg-white " style="display: flex">
                     <div class="row no-gutters align-items-center">
                         <div class="col">
+                            {% if article.avatar %}
+                            <img src="http://lesphon-1252495278.picsh.myqcloud.com/{{ article.avatar }}?imageMogr2/crop/x200/gravity/center" class="card-img-top " style="height:200px ">
+                            {% endif %}
                             <div class="card-body">
 
                                     <span class="blog-meta__post-by">{{ article.total_views }}&nbsp;&nbsp;views</span>

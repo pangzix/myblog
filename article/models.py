@@ -6,6 +6,8 @@ from taggit.managers import TaggableManager
 from ckeditor.fields import RichTextField
 import markdown
 from django.utils.html import strip_tags
+from .wan_storage_cos import QcloudStorage
+
 # Create your models here.
 
 class ArticleColumn(models.Model):
@@ -17,6 +19,7 @@ class ArticleColumn(models.Model):
 
 class ArticlePost(models.Model):
 
+    avatar = models.ImageField(verbose_name='文章图片',storage=QcloudStorage(),blank=True)
     tags = TaggableManager(blank=True)
     author = models.ForeignKey(User,on_delete=models.CASCADE)
     title = models.CharField(max_length=100)
@@ -34,6 +37,8 @@ class ArticlePost(models.Model):
     )
 
     def save(self,*args,**kwargs):
+
+
         self.modified_time = timezone.now()
 
         md = markdown.Markdown(extensions=[
