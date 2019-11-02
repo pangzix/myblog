@@ -1,0 +1,8 @@
+<div class="widget">
+    <div class="btn-group " role="group" aria-label="column" >
+            <a href="{% url 'index_url' %}" type="button" class="btn btn-secondary blog-meta__comments ">综合</a>
+        {% for column in column_list %}
+            <a  href="{% url 'article:column' column.pk %}" type="button" class="btn btn-light  blog-meta__comments hvr-shadow-radial rounded-lg" >{{ column.title }}</a>
+        {% endfor %}
+    </div>
+</div>

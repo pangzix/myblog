@@ -16,8 +16,9 @@
     <div class="row ">
         <div class="col-12">
             {% for article in articles %}
-
-
+            {% if article.avatar %}
+                            <img src="{{ avatars }}" class="card-img-top " style="">
+{% endif %}
                 {% if article.column %}
                     <button type="button" class="btn btn-sm mb-2 btn-dark">{{ article.column }}</button>
                 {% endif %}

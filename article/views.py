@@ -1,5 +1,5 @@
-from django.shortcuts import render,redirect
-from .models import ArticlePost,Timeline
+from django.shortcuts import render,redirect,get_object_or_404
+from .models import ArticlePost,Timeline,ArticleColumn
 from django.http import HttpResponse
 from .forms import ArticlePostForm
 from django.contrib.auth.models import User
@@ -12,9 +12,20 @@ from django.views import generic
 from markdown.extensions.toc import TocExtension
 from django.utils.text import slugify
 import re
+from PIL import Image
+from urllib.request import urlopen
+from django.conf import settings
 
 # Create your views here.
 
+def column(request,pk):
+    col = get_object_or_404(ArticleColumn,pk=pk)
+    article_list = ArticlePost.objects.filter(column=col)
+    paginator = Paginator(article_list, 5)
+    page = request.GET.get('page')
+    articles = paginator.get_page(page)
+    comments = Comment.objects.all()
+    return render(request,'article/index.html',context={'articles':articles,'comments':comments})
 
 def archive(request,year,month):
     articles= ArticlePost.objects.filter(created__year=year,
@@ -45,6 +56,8 @@ def article_list(request):
     context = {'articles':articles}
     return render(request,'article/list.html',context)
 
+
+
 def article_detail(request,id):
     article = ArticlePost.objects.get(id=id)
     comments = Comment.objects.filter(article=id)
@@ -66,7 +79,7 @@ def article_detail(request,id):
 @permission_required('article.can_add_article_post')
 def article_create(request):
     if request.method == "POST":
-        article_post_form = ArticlePostForm(data=request.POST)
+        article_post_form = ArticlePostForm(request.POST,request.FILES)
         if article_post_form.is_valid():
             new_article=article_post_form.save(commit=False)
             new_article.author = User.objects.get(id=request.user.id)

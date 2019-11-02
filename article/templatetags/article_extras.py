@@ -1,4 +1,4 @@
-from ..models import ArticlePost
+from ..models import ArticlePost,ArticleColumn
 from  django import template
 from django.utils import timezone
 import math
@@ -21,7 +21,11 @@ def show_archives(context):
     return {
         'date_list': ArticlePost.objects.dates('created', 'month', order='DESC'),
     }
-
+@register.inclusion_tag('article/inclusions/_column.html', takes_context=True)
+def show_columns(context):
+    return {
+        'column_list':ArticleColumn.objects.all(),
+    }
 
 #获取相对时间
 @register.filter(name='timesince_zh')
