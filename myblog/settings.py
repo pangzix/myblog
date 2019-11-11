@@ -49,7 +49,7 @@ INSTALLED_APPS = [
     'allauth.socialaccount',
     'allauth.socialaccount.providers.github',
     'allauth.socialaccount.providers.weibo',
-
+    'allauth.socialaccount.providers.weixin',
     'crispy_forms',
 
     'comment',
