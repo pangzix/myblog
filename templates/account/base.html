@@ -1,18 +1,74 @@
-{% extends "base.html" %}
-{% block base_content %}
-    <style>
-    .col-center-block{
-        float: none;
-        display: block;
-        margin: 0 auto;
-        /*margin-left:auto;margin-right:auto;*/
-    }
+{% load staticfiles %}
+{% load article_extras %}
+<!DOCTYPE html>
+<!-- 网站主语言 -->
+<html lang="zh-cn">
+
+<head>
+    <!-- 网站采用的字符编码 -->
+    <meta charset="utf-8">
+    <!-- 预留网站标题的位置 -->
+    <title>{% block title %}{% endblock %}</title>
+
+    <!-- 引入bootstrap的css文件 -->
+     <script src="https://kit.fontawesome.com/38b2ba9329.js"></script>
+    <script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
+    <!-- 新 Bootstrap4 核心 CSS 文件 -->
+     <link rel="stylesheet" href="https://cdn.bootcss.com/twitter-bootstrap/4.3.1/css/bootstrap.css" rel="stylesheet">
+     <link rel="stylesheet" href="{% static 'md_css/fridenly.css' %}">
+     <link rel="stylesheet" href="{% static 'hover/hover.css' %}">
+     <link rel="stylesheet" href="{% static 'wpxon-blog/myblog.css' %}">
+     <link rel="stylesheet" href="{% static 'markdown/toc.css' %}">
+     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+</head>
+
+ <body  style="padding-top: 80px; background-color: whitesmoke" >
+
+
+    <!-- 引入导航栏 -->
+    {% include 'header.html' %}
+    <!-- 预留具体页面的位置 -->
+    <div id="wrapper">
+            {% block base_content %}
+                <div class="container">
+                <div class="row">
+                    <div class="col-xs-6 col-md-4 col-center-block">
+
+                    </div>
+                </div>
+                </div>
+                {% block content %}
+                {% endblock %}
+            {% endblock %}
+        <div id="push"></div>
+    </div>
+    <!-- 引入注脚 -->
+    {% include 'footer.html' %}
+     <style>
+        html, body {
+            height: 100%;
+            margin: 0;
+        }
+
+        #wrapper {
+            min-height: 100%;
+            margin-bottom: -60px;
+        }
+
+        #footer,
+        #push {
+            height: 60px;
+        }
     </style>
-    <div class="container">
-    <div class="row">
-        <div class="col-xs-6 col-md-4 col-center-block"
-             {% block content %}
-                 {% endblock %}
-    </div>
-    </div>
-{% endblock %}
+    <!-- jQuery文件。务必在bootstrap.min.js 之前引入 -->
+    <script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
+    {% include 'back_to_top_func.html' %}
+    {% block script %} {% endblock script %}
+    <!-- bootstrap.bundle.min.js 用于弹窗、提示、下拉菜单，包含了 popper.min.js -->
+     <script src="https://cdn.bootcss.com/popper.js/1.15.0/esm/popper.min.js"></script>
+    <!-- 最新的 Bootstrap4 核心 JavaScript 文件 -->
+    <script src="https://cdn.bootcss.com/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
+</body >
+
+
+</html>
