@@ -108,17 +108,17 @@
 
                         <hr>
                         <p>
-                            <strong style="color:gray">
+                            <a style="color:gray" href="{% url "userprofile:info" user.id %}">
                                 {{ comment.user }}
-                            </strong>
+                            </a>
 
                             {% if comment.reply_to %}
                                 <i class="far fa-arrow-alt-circle-right"
                                    style="color:cornflowerblue;"
                                    ></i>
-                                <strong style="color:gray">
+                                <a style="color:gray" href="{% url "userprofile:info" comment.reply_to.id %}">
                                     {{ comment.reply_to }}
-                                </strong>
+                                </a>
                             {% endif %}
                         </p>
                         <div>{{ comment.body|safe }}</div>

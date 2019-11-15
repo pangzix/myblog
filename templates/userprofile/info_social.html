@@ -1,0 +1,29 @@
+{% extends "base.html" %} {% load staticfiles %}
+{% block title %} 个人信息 | Lesphon的个人网站 {% endblock title %}
+{% block content %}
+<div class="container">
+    <div class="row">
+        <div class="col-12">
+<div class="card" style="width: 18rem;">
+  <img src="{{ profile_socila.get_avatar_url }}" class="card-img-top" >
+  <div class="card-body">
+    <h5 class="card-title">用户信息</h5>
+      <p class="card-text">
+        <li class="liswidget_recent_comments list-group-item border border-light ">
+            <a class=" hvr-forward  recent-post__title" >用户名:{{ user.username }}</a>
+         </li>
+
+        <li class="liswidget_recent_comments list-group-item border border-light ">
+            <a class=" hvr-forward  recent-post__title" >电话:{{ profile.phone }}</a>
+         </li>
+
+        <li class="liswidget_recent_comments list-group-item border border-light ">
+            <a class=" hvr-forward  recent-post__title" >简介:{{ profile.bio }}</a>
+         </li>
+  </p>
+  </div>
+  </div>
+</div>
+</div>
+    </div>
+{% endblock content %}

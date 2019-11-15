@@ -6,7 +6,8 @@ from .forms import ProfileForm
 from .models import Profile
 from django.contrib.auth.decorators import login_required,permission_required
 from django.contrib.auth.models import User
-
+from allauth.socialaccount.providers.github.provider import GitHubAccount
+from allauth.socialaccount.models import SocialAccount
 # Create your views here.
 
 def user_login(request):
@@ -60,14 +61,36 @@ def user_register(request):
 
 
 
-@login_required(login_url='/userprofile/login/')
+@login_required(login_url='account_login')
 def profile_edit(request,id):
     user = User.objects.get(id=id)
     if request.user == user:
-        if Profile.objects.filter(user_id=id).exists():
+        if SocialAccount.objects.filter(user_id=id).exists():
+            profile_social = SocialAccount.objects.get(user_id=id)
             profile = Profile.objects.get(user_id=id)
+
+            if request.method == 'POST':
+                if request.user != user:
+                    return HttpResponse("ERROR")
+                profile_form = ProfileForm(request.POST, request.FILES)
+                if profile_form.is_valid():
+                    profile_cd = profile_form.cleaned_data
+                    profile.phone = profile_cd['phone']
+                    profile.bio = profile_cd['bio']
+                    profile.save()
+                    return redirect("userprofile:edit", id=id)
+                else:
+                    return HttpResponse("ERROR")
+            elif request.method == 'GET':
+                profile_form = ProfileForm()
+                context = {'profile_form': profile_form, 'profile': profile, 'user': user,'profile_social':profile_social}
+                return render(request, 'userprofile/edit_social.html', context)
+            else:
+                return HttpResponse("ERROR")
+
         else:
-            profile = Profile.objects.create(user=user)
+            profile = Profile.objects.get(user_id=id)
+
 
         if request.method == 'POST':
             if request.user !=user:
@@ -86,9 +109,23 @@ def profile_edit(request,id):
         elif request.method == 'GET':
             profile_form = ProfileForm()
             context = {'profile_form':profile_form,'profile':profile,'user':user}
-            return render(request,'userprofile/edit.html',context)
+            return render(request, 'userprofile/edit_local.html', context)
         else:
             return HttpResponse("ERROR")
 
     else:
         return HttpResponse("哦豁，崩溃了")
+
+
+@login_required(login_url='account_login')
+def profile_info(request,id):
+    user = User.objects.get(id=id)
+    if SocialAccount.objects.filter(user_id=id).exists():
+        profile_social = SocialAccount.objects.get(user_id=id)
+        profile = Profile.objects.get(user_id=id)
+        context = {'profile': profile,'profile_socila':profile_social,'user': user}
+        return render(request, 'userprofile/info_social.html', context)
+    else:
+        profile = Profile.objects.get(user_id=id)
+        context = {'profile': profile, 'user': user}
+        return render(request, 'userprofile/info_local.html', context)
