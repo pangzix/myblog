@@ -95,6 +95,7 @@ ACCOUNT_EMAIL_REQUIRED = True
 ACCOUNT_EMAIL_VERIFICATION='none'
 #登出直接退出，不用确认
 ACCOUNT_LOGOUT_ON_GET=True
+ACCOUNT_SIGNUP_FORM_CLASS = 'userprofile.forms.SignupForm'
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',

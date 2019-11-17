@@ -29,3 +29,11 @@ class ProfileForm(forms.ModelForm):
     class Meta:
         model = Profile
         fields = ('phone','avatar','bio')
+
+class SignupForm(forms.Form):
+    def signup(self,request,user):
+        user_profile = Profile()
+        user_profile.user = user
+        user.save()
+        user_profile.save()
+
