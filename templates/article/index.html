@@ -18,18 +18,30 @@
         <link rel="stylesheet" href="{% static 'hover/hover.css' %}">
     <link rel="stylesheet" href="{% static 'wpxon-blog/myblog.css' %}">
     <link rel="stylesheet" href="{% static 'particles/css/style.css' %}">
+    <link rel="stylesheet" href="{% static 'loading/loading.css' %}">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 </head>
-<!-- 粒子插件-->
- <div id="particles-js"></div>
- <script src="{% static 'particles/js/particles.js'%}"></script>
-     <script src="{% static 'particles/js/app.js' %}"></script>
 
 <body style="background-color: whitesmoke;padding-top: 70px;">
 
+<div class="loader">
+                <div class="dot"></div>
+                <div class="dot"></div>
+                <div class="dot"></div>
+                <div class="dot"></div>
+                <div class="dot"></div>
+</div>
+
+<div style="display:none">
+
+<!-- 粒子插件-->
+ <div id="particles-js"></div>
+ <script src="{% static 'particles/js/particles.js'%}"></script>
+ <script src="{% static 'particles/js/app.js' %}"></script>
+
     {% include 'header.html' %}
-    <div id="wrapper">
-        <div class="container ">
+<div id="wrapper">
+<div class="container ">
 <!--<div class="d-flex fixed-full">
 <img src="https://images.pexels.com/photos/673865/pexels-photo-673865.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940" class="img-fluid"  alt="responsive image">
 </div>-->
@@ -120,9 +132,10 @@
 </div>
 
 </div>
-        <div id="push"></div>
+     <div id="push"></div>
     <div id="wrapper">
     {% include 'footer.html' %}
+    </div>
     <style>
         html, body {
             height: 100%;
@@ -139,6 +152,13 @@
             height: 60px;
         }
     </style>
+<script type="text/javascript">
+window.onload=function() {
+	window.document.body.removeChild(window.document.body.children[0]);
+	window.document.body.children[0].style.display="";
+}
+</script>
+
     <!-- jQuery文件。务必在bootstrap.min.js 之前引入 -->
     <script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
  {% include 'back_to_top_func.html' %}
@@ -146,7 +166,7 @@
     <!-- bootstrap.bundle.min.js 用于弹窗、提示、下拉菜单，包含了 popper.min.js -->
      <script src="https://cdn.bootcss.com/popper.js/1.15.0/esm/popper.min.js"></script>
     <!-- 最新的 Bootstrap4 核心 JavaScript 文件 -->
-    <script src="https://cdn.bootcss.com/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
+        <script src="https://cdn.bootcss.com/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script></div>
 </body>
 
 
