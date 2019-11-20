@@ -25,16 +25,7 @@
 </head>
 
  <body  style="padding-top: 80px; background-color: whitesmoke" >
-<div class="loader">
-                <div class="dot"></div>
-                <div class="dot"></div>
-                <div class="dot"></div>
-                <div class="dot"></div>
-                <div class="dot"></div>
-</div>
 
-
- <div style="display:none">
      <!-- 粒子插件-->
      <div id="particles-js"></div>
      <script src="{% static 'particles/js/particles.js'%}"></script>
@@ -49,9 +40,9 @@
         <div id="push"></div>
     </div>
 
-
     <!-- 引入注脚 -->
     {% include 'footer.html' %}
+
      <style>
         html, body {
             height: 100%;
@@ -69,12 +60,8 @@
         }
     </style>
 
- <script type="text/javascript">
-window.onload=function() {
-	window.document.body.removeChild(window.document.body.children[0]);
-	window.document.body.children[0].style.display="";
-}
-</script>
+
+
     <!-- jQuery文件。务必在bootstrap.min.js 之前引入 -->
     <script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
     {% include 'back_to_top_func.html' %}
