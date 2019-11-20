@@ -45,9 +45,7 @@
   </div>
 </div>
 
-<!-- 定义放置文章标题的div容器 -->
-<div class="content-body " >
-    <div class="container">
+<div class="container">
         <div class="row">
             <div class="col-md-8">
             {% show_columns %}
@@ -109,22 +107,22 @@
 {% endif %}
             </div>
 
-            <aside class="col-md-4">
+            <div class="col-md-4 sidebar" id="sidebar">
+                    <div class="sidebar__inner">
                  {% show_recent_articles %}
 
                 {% show_contactings %}
 
                 {% show_archives %}
-            </aside>
+                    </div>
+            </div>
         </div>
     </div>
 </div>
-
+<div id="push"></div>
 </div>
-     <div id="push"></div>
-    <div id="wrapper">
+</div>
     {% include 'footer.html' %}
-    </div>
     <style>
         html, body {
             height: 100%;
@@ -141,10 +139,29 @@
             height: 60px;
         }
     </style>
+<!-- 粘性侧边栏样式 -->
+<style>
+    .sidebar{
+        will-change: min-height;
+    }
+
+    .sidebar__inner{
+        transform: translate(0, 0);
+        transform: translate3d(0, 0, 0);
+        will-change: position, transform;
+    }
+</style>
     <!-- jQuery文件。务必在bootstrap.min.js 之前引入 -->
     <script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
+<!-- 引入粘性侧边栏 -->
+<script src="{% static 'sticky_sidebar/jquery.sticky-sidebar.min.js' %}"></script>
+<script type="text/javascript">
+    $('#sidebar').stickySidebar({
+        topSpacing: 70,
+        bottomSpacing: 20,
+    });
+</script>
  {% include 'back_to_top_func.html' %}
-    {% block script %} {% endblock script %}
     <!-- bootstrap.bundle.min.js 用于弹窗、提示、下拉菜单，包含了 popper.min.js -->
      <script src="https://cdn.bootcss.com/popper.js/1.15.0/esm/popper.min.js"></script>
     <!-- 最新的 Bootstrap4 核心 JavaScript 文件 -->
