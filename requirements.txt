@@ -32,7 +32,7 @@ mysqlclient==1.4.4
 oauthlib==3.1.0
 odfpy==1.4.0
 openpyxl==3.0.0
-Pillow==6.1.0
+Pillow==6.2.0
 Pygments==2.4.2
 python3-openid==3.1.0
 pytz==2019.2
