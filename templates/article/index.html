@@ -10,19 +10,22 @@
     <!-- 预留网站标题的位置 -->
     <title> Lesphon的个人网站</title>
     <!-- 引入bootstrap的css文件 -->
-     <script src="https://kit.fontawesome.com/38b2ba9329.js"></script>
+    <script src="https://cdn.bootcss.com/font-awesome/5.11.2/js/all.js"></script>
     <script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
     <!-- 新 Bootstrap4 核心 CSS 文件 -->
      <link rel="stylesheet" href="https://cdn.bootcss.com/twitter-bootstrap/4.3.1/css/bootstrap.css" rel="stylesheet">
+        <link href="https://cdn.bootcss.com/font-awesome/5.11.2/css/all.css" rel="stylesheet">
      <link rel="stylesheet" href="{% static 'md_css/monokai.css' %}">
         <link rel="stylesheet" href="{% static 'hover/hover.css' %}">
     <link rel="stylesheet" href="{% static 'wpxon-blog/myblog.css' %}">
     <link rel="stylesheet" href="{% static 'particles/css/style.css' %}">
-    <link rel="stylesheet" href="{% static 'loading/loading.css' %}">
+    <link rel="stylesheet" href="{% static 'progress/progress.css' %}">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 </head>
 
 <body style="background-color: whitesmoke;padding-top: 70px;">
+<progress id="content_progress" value="0"></progress>
+ <script src="{% static 'progress/progress.js' %}"></script>
 <!-- 粒子插件-->
  <div id="particles-js"></div>
  <script src="{% static 'particles/js/particles.js'%}"></script>
