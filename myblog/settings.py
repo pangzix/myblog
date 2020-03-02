@@ -67,6 +67,8 @@ INSTALLED_APPS = [
 
     'axes',
 
+    'mlog',
+
 ]
 
 

@@ -20,6 +20,7 @@ from django.conf.urls.static import static
 from article.views import index_view
 from django.views.generic.base import RedirectView
 
+
 urlpatterns = [
     path('myblog/', admin.site.urls),
     path('',index_view,name='index_url'),
@@ -30,6 +31,7 @@ urlpatterns = [
     path('comment/',include('comment.urls',namespace='comment')),
     path('ckeditor/',include('ckeditor_uploader.urls')),
     path('pciture/',include('picture.urls',namespace='picture')),
+    path('mlog/',include('mlog.urls',namespace='mlog')),
 ]
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
