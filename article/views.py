@@ -1,5 +1,5 @@
 from django.shortcuts import render,redirect,get_object_or_404
-from .models import ArticlePost,Timeline,ArticleColumn
+from .models import ArticlePost,ArticleColumn
 from django.http import HttpResponse
 from .forms import ArticlePostForm
 from django.contrib.auth.models import User
@@ -34,10 +34,6 @@ def archive(request,year,month):
 
     return  render(request,'article/index.html',context={'articles':articles})
 
-class TimelineView(generic.ListView):
-    model = Timeline
-    template_name = 'article/timeline.html'
-    context_object_name = 'timeline_list'
 
 def index_view(request):
     article_list = ArticlePost.objects.all()
@@ -103,12 +99,7 @@ def article_delete(request,id):
 
 @permission_required('article.can_change_article_post')
 def article_update(request, id):
-    """
-    更新文章的视图函数
-    通过POST方法提交表单，更新titile、body字段
-    GET方法进入初始表单页面
-    id： 文章的 id
-    """
+
 
     # 获取需要修改的具体文章对象
     article = ArticlePost.objects.get(id=id)
