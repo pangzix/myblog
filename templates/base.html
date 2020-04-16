@@ -11,63 +11,102 @@
     <title>{% block title %}{% endblock %}</title>
 
     <!-- 引入bootstrap的css文件 -->
-    <script src="https://cdn.bootcss.com/font-awesome/5.11.2/js/all.js"></script>
+    <link href="https://cdn.bootcss.com/font-awesome/5.13.0/css/all.css" rel="stylesheet">
     <script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
     <!-- 新 Bootstrap4 核心 CSS 文件 -->
      <link rel="stylesheet" href="https://cdn.bootcss.com/twitter-bootstrap/4.3.1/css/bootstrap.css" rel="stylesheet">
+    <link href="https://cdn.bootcss.com/layer/2.1/skin/layer.css" rel="stylesheet">
     <link href="https://cdn.bootcss.com/font-awesome/5.11.2/css/all.css" rel="stylesheet">
      <link rel="stylesheet" href="{% static 'md_css/fridenly.css' %}">
     <link rel="stylesheet" href="{% static 'hover/hover.css' %}">
     <link rel="stylesheet" href="{% static 'wpxon-blog/myblog.css' %}">
     <link rel="stylesheet" href="{% static 'markdown/toc.css' %}">
     <link rel="stylesheet" href="{% static 'progress/progress.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'sidebar/css/normalize.css' %}" />
+    <link href="https://cdn.bootcss.com/font-awesome/5.13.0/css/all.css" rel="stylesheet">
+
+    <link rel="stylesheet" type="text/css" href="{% static 'sidebar/css/menu_topside.css' %}" />
+    <!--[if IE]>
+    <script src="https://cdn.bootcss.com/html5shiv/3.7.3/html5shiv.js"></script>
+	<![endif]-->
+
+<!-- highlight.js -->
+    <style>
+    .codehilite {
+      padding: 0;
+    }
+
+    /* for block of numbers */
+    .hljs-ln-numbers {
+      -webkit-touch-callout: none;
+      -webkit-user-select: none;
+      -khtml-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
+      user-select: none;
+
+      text-align: center;
+      color: #ccc;
+      border-right: 1px solid #CCC;
+      vertical-align: top;
+      padding-right: 5px;
+    }
+
+    .hljs-ln-n {
+      width: 30px;
+    }
+
+    /* for block of code */
+    .hljs-ln .hljs-ln-code {
+      padding-left: 10px;
+      white-space: pre;
+    }
+  </style>
+
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 </head>
 <progress id="content_progress" value="0" ></progress>
- <body   >
-
-
-    <!-- 引入导航栏 -->
-    {% include 'header.html' %}
-
-    <!-- 预留具体页面的位置 -->
-    <div id="wrapper">
+ <body>
+ {% include 'top_nav.html' %}
+    <div class="menu-wrap">
+        <nav class="menu-top">
+            <div class="profile"><span>My site</span></div>
+            <div class="icon-list">
+                <a href="#"><i class="fas fa-star"></i></a>
+                <a href="#"><i class="fas fa-bell"></i></a>
+                <a href="#"><i class="fas fa-envelope"></i></a>
+                <a href="#"><i class="fas fa-comment"></i></a>
+            </div>
+        </nav>
+        <nav class="menu-side">
+            <a href="#">Recent Stories</a>
+            <a href="#">Reading List</a>
+            <a href="#">My Stories</a>
+            <a href="#">Categories</a>
+        </nav>
+    </div><!-- /menu-wrap-->
+    <div class="content-wrap">
         {% block content %}{% endblock content %}
-        <div id="push"></div>
-    </div>
-
-    <!-- 引入注脚 -->
-    {% include 'footer.html' %}
-
-     <style>
-        html, body {
-            height: 100%;
-            margin: 0;
-        }
-
-        #wrapper {
-            min-height: 100%;
-            margin-bottom: -60px;
-
-        }
-
-        #footer,
-        #push {
-            height: 60px;
-        }
-    </style>
-
+    </div><!-- /content-wrap-->
 
 
     <!-- jQuery文件。务必在bootstrap.min.js 之前引入 -->
     <script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
+     <script src="{% static 'sticky_sidebar/jquery.sticky-sidebar.js' %}"></script>
+    <script src="https://cdn.bootcss.com/layer/2.1/layer.js"></script>
      <script src="{% static 'progress/progress.js' %}"></script>
     {% include 'back_to_top_func.html' %}
     {% block script %} {% endblock script %}
     <!-- bootstrap.bundle.min.js 用于弹窗、提示、下拉菜单，包含了 popper.min.js -->
      <script src="https://cdn.bootcss.com/popper.js/1.15.0/esm/popper.min.js"></script>
     <!-- 最新的 Bootstrap4 核心 JavaScript 文件 -->
-     <script src="https://cdn.bootcss.com/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script></div>
+     <script src="https://cdn.bootcss.com/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
+     <script src="https://cdn.bootcss.com/highlightjs-line-numbers.js/2.7.0/highlightjs-line-numbers.min.js"></script>
+    <script src="{% static 'csrf.js' %}"></script>
+    <script src="{% static 'sidebar/js/classie.js' %}"></script>
+	<script src="{% static 'sidebar/js/main.js' %}"></script>
+
+
 </body >
 
 

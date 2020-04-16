@@ -1,0 +1,37 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <div class="container-fluid">
+    <div id="st-trigger-effects" class="column">
+        <button class="fas fa-align-justify" id="open-button" style="border: none;background: transparent"></button>
+    </div>
+<div>
+    <ul class="navbar-nav">
+        {% if user.is_authenticated %}
+        <li class="navbar-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                   {% if unread_count %}
+                       <svg viewBox="0 0 8 8" width="8px" height="8px">
+                       <circle cx="4" cy="4" r="4" fill="#ff6bfb"></circle>
+                       </svg>
+                       {% endif %}
+                    {{ user.username }}
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item" href="{% url 'userprofile:edit' user.id%}">info</a>
+                    <a class="dropdown-item" href="#">message
+                    {% if unread_count %}
+                        <span class="badge badge-danger">
+                        {{ unread_count }}
+                        </span>
+                        {% endif %}</a>
+                    <a class="dropdown-item" href="{% url 'account_logout' %}">sign out</a>
+                </div>
+              </li>
+          {% else %}
+              <li class="nav-item">
+                <a class="nav-link" href="{% url 'account_login' %}">sign in</a>
+              </li>
+          {% endif %}
+    </ul>
+</div>
+  </div>
+</nav>
