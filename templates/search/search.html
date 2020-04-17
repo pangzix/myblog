@@ -1,92 +1,47 @@
+{% extends 'base.html' %}
 {% load staticfiles %}
-{% load article_extras %}
-<!DOCTYPE html>
-<!-- 网站主语言 -->
-<html lang="zh-cn">
-
-<head>
-    <!-- 网站采用的字符编码 -->
-    <meta charset="utf-8">
-    <!-- 预留网站标题的位置 -->
-    <title>{{query}} | Lesphon的个人网站</title>
-    <script src="https://kit.fontawesome.com/38b2ba9329.js"></script>
-    <script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
-    <!-- 新 Bootstrap4 核心 CSS 文件 -->
-     <link rel="stylesheet" href="https://cdn.bootcss.com/twitter-bootstrap/4.3.1/css/bootstrap.css" rel="stylesheet">
-     <link rel="stylesheet" href="{% static 'md_css/monokai.css' %}">
-        <link rel="stylesheet" href="{% static 'hover/hover.css' %}">
-    <link rel="stylesheet" href="{% static 'wpxon-blog/myblog.css' %}">
-    <link rel="stylesheet" href="{% static 'particles/css/style.css' %}">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-</head>
-
-{% load staticfiles %}
-
 {% load highlight %}
+{% load article_extras %}
+{% block content %}
+<div class="container" style="padding-bottom: 60px">
 
-
-
-<style>
-    span.highlighted{ color: #ff0000;}
-
-    .col-center-lock{
-        float:none;
-        display:block;
-        margin:0 auto;
-        /* margin-left:auto;margin-right:auto;*/
-    }
-</style>
-
-<body>
-    {%  include 'header.html' %}
-<div id="wrapper">
-    <div class="container" style="padding-top: 70px">
-            <div class="card-body ">
-                <a class="card-title  text-secondary disabled">当前搜索：{{query}}</a>
+                <a class="text-secondary disabled">当前搜索：{{query}}</a>
                 {% for result in page.object_list %}
-                <p class="card-text">
-                    <a href="{% url 'article:article_detail' result.object.pk %}">{{result.object.title}}</a>
-                    <br>
-                            <span><i class="fas fa-clock bg " style="color: pink;"></i>{{ result.object.created|timesince_zh }}</span>
-                            <span><i class="fas fa-comments " style="color: yellowgreen;"></i><!-- 修改为评论的计数 -->{{ result.object.comments.count }}&nbsp;&nbsp;&nbsp;</span>
-                            <span><i class="fas fa-eye " style="color: lightskyblue;"></i>{{ result.object.total_views }}&nbsp;&nbsp;&nbsp;</span>
-                    <br>
-                    {% with result.object.body|safe as body %}
-                    <span>{% highlight body with query %}</span>
-                    {% endwith %}
-                </p>
+
+                    <div class="card mb-2  p-3 md-5 bg-white " style="display: flex">
+                    <div class="row no-gutters align-items-center">
+                        <div class="col">
+
+                            <div class="card-body">
+
+                                    <span class="blog-meta__post-by">{{ result.object.comments.count }}&nbsp;&nbsp;&nbsp;<i class="fas fa-comments " style="color: yellowgreen;"></i></span>
+                                    <span class="blog-meta__separator">|</span>
+                                    <span class="blog-meta__post-by">{{ result.object.total_views }}&nbsp;&nbsp;&nbsp;<i class="fas fa-eye " style="color: lightskyblue;"></i></span>
+                                    <span class="blog-meta__separator">|</span>
+
+
+                                <h4 class="blog-post__title">
+                                <a class="text-secondary no-underline blog-post__title"   href="{% url 'article:article_detail' result.object.pk %}">{{result.object.title}}</a>
+                            </h4>
+                            <p class="f-15 blog-meta__post-by">
+                                {% with result.object.body|safe as body %}
+                                    <span>{% highlight body with query %}</span>
+                                {% endwith %}
+                            </p>
+                        </div>
+                        </div>
+                    </div>
+                </div>
+
+
+
+
+
                 {% empty %}
 
                 <h3>NONE</h3>
                 {% endfor %}
 
-
-            </div>
-        </div>
-    <div id="push"></div>
 </div>
-    {% include 'footer.html' %}
-    <style>
-        html, body {
-            height: 100%;
-            margin: 0;
-        }
 
-        #wrapper {
-            min-height: 100%;
-            margin-bottom: -60px;
-        }
-
-        #footer,
-        #push {
-            height: 60px;
-        }
-    </style>
-    <!-- jQuery文件。务必在bootstrap.min.js 之前引入 -->
-    <script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
-    {% block script %} {% endblock script %}
-    <!-- bootstrap.bundle.min.js 用于弹窗、提示、下拉菜单，包含了 popper.min.js -->
-     <script src="https://cdn.bootcss.com/popper.js/1.15.0/esm/popper.min.js"></script>
-    <!-- 最新的 Bootstrap4 核心 JavaScript 文件 -->
-    <script src="https://cdn.bootcss.com/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
-</body>
+{% endblock content %}

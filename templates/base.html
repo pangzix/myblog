@@ -1,5 +1,7 @@
 {% load staticfiles %}
 {% load article_extras %}
+{% load notifications_tags %}
+{% notifications_unread as unread_count %}
 <!DOCTYPE html>
 <!-- 网站主语言 -->
 <html lang="zh-cn">
@@ -7,6 +9,8 @@
 <head>
     <!-- 网站采用的字符编码 -->
     <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
     <!-- 预留网站标题的位置 -->
     <title>{% block title %}{% endblock %}</title>
 
@@ -63,23 +67,35 @@
     }
   </style>
 
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<style>
+    .container{
+        padding-bottom: 60px;
+    }
+</style>
 </head>
 <progress id="content_progress" value="0" ></progress>
  <body>
  {% include 'top_nav.html' %}
     <div class="menu-wrap">
         <nav class="menu-top">
-            <div class="profile"><span>My site</span></div>
+            <a class="profile btn" href="{% url 'index_url' %}" role="button"><span>My site</span></a>
             <div class="icon-list">
                 <a href="#"><i class="fas fa-star"></i></a>
-                <a href="#"><i class="fas fa-bell"></i></a>
+                <a href="{% url 'notice:list' %}" style="{% if unread_count %}
+                                    color:tomato;
+                                    {% endif %}"><i class="fas fa-bell"></i></a>
                 <a href="#"><i class="fas fa-envelope"></i></a>
                 <a href="#"><i class="fas fa-comment"></i></a>
             </div>
         </nav>
         <nav class="menu-side">
-            <a href="#">Recent Stories</a>
+            <a>
+                <form class="nav-item navbar-form mr-2 py-md-2  " role="search" method="get" id="searchform" action="{% url 'article:haystack_search' %}">
+                        <div class="input-group rounded">
+                    <input type="text" name="q" class="form-control  bg-transparent border " placeholder="搜索" autocomplete="off" required=True>
+                        </div>
+                 </form>
+            </a>
             <a href="#">Reading List</a>
             <a href="#">My Stories</a>
             <a href="#">Categories</a>
@@ -98,7 +114,7 @@
     {% include 'back_to_top_func.html' %}
     {% block script %} {% endblock script %}
     <!-- bootstrap.bundle.min.js 用于弹窗、提示、下拉菜单，包含了 popper.min.js -->
-     <script src="https://cdn.bootcss.com/popper.js/1.15.0/esm/popper.min.js"></script>
+    <script src="https://cdn.bootcss.com/popper.js/1.15.0/umd/popper.js"></script>
     <!-- 最新的 Bootstrap4 核心 JavaScript 文件 -->
      <script src="https://cdn.bootcss.com/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
      <script src="https://cdn.bootcss.com/highlightjs-line-numbers.js/2.7.0/highlightjs-line-numbers.min.js"></script>

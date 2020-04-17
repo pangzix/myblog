@@ -19,6 +19,7 @@ from django.conf import settings
 from django.conf.urls.static import static
 from article.views import index_view
 from django.views.generic.base import RedirectView
+import notifications.urls
 
 
 urlpatterns = [
@@ -32,6 +33,8 @@ urlpatterns = [
     path('ckeditor/',include('ckeditor_uploader.urls')),
     path('pciture/',include('picture.urls',namespace='picture')),
     path('mlog/',include('mlog.urls',namespace='mlog')),
+    path('inbox/notifications/',include(notifications.urls,namespace='notifications')),
+    path('notice/',include('notice.urls',namespace='notice')),
 ]
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 

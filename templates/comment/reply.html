@@ -28,7 +28,7 @@
     <!-- jQuery文件。务必在bootstrap.min.js 之前引入 -->
     <script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
     <!-- bootstrap.bundle.min.js 用于弹窗、提示、下拉菜单，包含了 popper.min.js -->
-     <script src="https://cdn.bootcss.com/popper.js/1.15.0/esm/popper.min.js"></script>
+    <script src="https://cdn.bootcss.com/popper.js/1.15.0/umd/popper.js"></script>
     <!-- 最新的 Bootstrap4 核心 JavaScript 文件 -->
     <script src="https://cdn.bootcss.com/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
     <!-- csrf token -->
@@ -49,8 +49,8 @@
             data: {body: content},
             // 成功回调
             success: function(e){
-                if(e === '200 OK'){
-                    parent.location.reload();
+                if(e.code === '200 OK'){
+                    parent.post_reply_and_show_it(e.new_comment_id);
                 }
             }
         })

@@ -17,7 +17,7 @@
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                     <a class="dropdown-item" href="{% url 'userprofile:edit' user.id%}">info</a>
-                    <a class="dropdown-item" href="#">message
+                    <a class="dropdown-item" href="{% url 'notice:list' %}">message
                     {% if unread_count %}
                         <span class="badge badge-danger">
                         {{ unread_count }}
