@@ -18,3 +18,19 @@ class MlogPost(models.Model):
 
     def __str__(self):
         return self.body[:10]
+
+
+
+class MyVlogPost(models.Model):
+    title = models.CharField(max_length=200)
+    author = models.ForeignKey(User,on_delete=models.CASCADE)
+    tags = TaggableManager(blank=True)
+    source = models.CharField(verbose_name='视频嵌入代码',max_length=500)
+    add_time = models.DateTimeField(default=timezone.now,verbose_name='添加时间')
+
+    class Meta:
+        verbose_name = 'volg_or_videos'
+        verbose_name_plural = verbose_name
+
+    def __str__(self):
+        return self.title

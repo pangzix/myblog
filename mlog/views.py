@@ -1,8 +1,9 @@
-from django.shortcuts import render,redirect
+from django.shortcuts import render,redirect,get_object_or_404
 from django.http import HttpResponse
-from .models import MlogPost
+from .models import MlogPost,MyVlogPost
 from .forms import MlogPostForm
 from django.contrib.auth.models import User
+from django.core.paginator import Paginator
 
 
 def mlog_result(request):
@@ -25,3 +26,15 @@ def mlog_result(request):
 
         return render(request,'mlog/result.html',context)
 
+def vlog_list(request):
+    vlog_list = MyVlogPost.objects.all()
+    paginator = Paginator(vlog_list, 5)
+    page = request.GET.get('page')
+    vlogs = paginator.get_page(page)
+    context = {'vlogs':vlogs}
+    return render(request, 'mlog/vlog.html', context)
+
+def vlog_detail(request,pk):
+    vlog = get_object_or_404(MyVlogPost,pk=pk)
+    context = {'vlog':vlog}
+    return render(request,'mlog/vlog_detail.html',context)
