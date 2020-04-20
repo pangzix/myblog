@@ -1,5 +1,7 @@
 {% load staticfiles %}
 {% load article_extras %}
+{% load notifications_tags %}
+{% notifications_unread as unread_count %}
 <!DOCTYPE html>
 <!-- 网站主语言 -->
 <html lang="zh-cn">
@@ -7,67 +9,120 @@
 <head>
     <!-- 网站采用的字符编码 -->
     <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
     <!-- 预留网站标题的位置 -->
     <title>{% block title %}{% endblock %}</title>
 
     <!-- 引入bootstrap的css文件 -->
-     <script src="https://kit.fontawesome.com/38b2ba9329.js"></script>
+    <link href="https://cdn.bootcss.com/font-awesome/5.13.0/css/all.css" rel="stylesheet">
     <script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
     <!-- 新 Bootstrap4 核心 CSS 文件 -->
      <link rel="stylesheet" href="https://cdn.bootcss.com/twitter-bootstrap/4.3.1/css/bootstrap.css" rel="stylesheet">
+    <link href="https://cdn.bootcss.com/layer/2.1/skin/layer.css" rel="stylesheet">
+    <link href="https://cdn.bootcss.com/font-awesome/5.11.2/css/all.css" rel="stylesheet">
      <link rel="stylesheet" href="{% static 'md_css/fridenly.css' %}">
-     <link rel="stylesheet" href="{% static 'hover/hover.css' %}">
-     <link rel="stylesheet" href="{% static 'wpxon-blog/myblog.css' %}">
-     <link rel="stylesheet" href="{% static 'markdown/toc.css' %}">
-     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="{% static 'hover/hover.css' %}">
+    <link rel="stylesheet" href="{% static 'wpxon-blog/myblog.css' %}">
+    <link rel="stylesheet" href="{% static 'markdown/toc.css' %}">
+    <link rel="stylesheet" href="{% static 'progress/progress.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'sidebar/css/normalize.css' %}" />
+    <link href="https://cdn.bootcss.com/font-awesome/5.13.0/css/all.css" rel="stylesheet">
+
+    <link rel="stylesheet" type="text/css" href="{% static 'sidebar/css/menu_topside.css' %}" />
+    <!--[if IE]>
+    <script src="https://cdn.bootcss.com/html5shiv/3.7.3/html5shiv.js"></script>
+	<![endif]-->
+
+<!-- highlight.js -->
+    <style>
+    .codehilite {
+      padding: 0;
+    }
+
+    /* for block of numbers */
+    .hljs-ln-numbers {
+      -webkit-touch-callout: none;
+      -webkit-user-select: none;
+      -khtml-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
+      user-select: none;
+
+      text-align: center;
+      color: #ccc;
+      border-right: 1px solid #CCC;
+      vertical-align: top;
+      padding-right: 5px;
+    }
+
+    .hljs-ln-n {
+      width: 30px;
+    }
+
+    /* for block of code */
+    .hljs-ln .hljs-ln-code {
+      padding-left: 10px;
+      white-space: pre;
+    }
+  </style>
+
+<style>
+    .container{
+        padding-bottom: 60px;
+    }
+</style>
 </head>
+<progress id="content_progress" value="0" ></progress>
+ <body>
+ {% include 'top_nav.html' %}
+    <div class="menu-wrap">
+        <nav class="menu-top">
+            <a class="profile btn" href="{% url 'index_url' %}" role="button"><span>My site</span></a>
+            <div class="icon-list">
+                <a href="#"><i class="fas fa-star"></i></a>
+                <a href="{% url 'notice:list' %}" style="{% if unread_count %}
+                                    color:tomato;
+                                    {% endif %}"><i class="fas fa-bell"></i></a>
+                <a href="#"><i class="fas fa-envelope"></i></a>
+                <a href="#"><i class="fas fa-comment"></i></a>
+            </div>
+        </nav>
+        <nav class="menu-side">
+            <a>
+                <form class="nav-item navbar-form mr-2 py-md-2  " role="search" method="get" id="searchform" action="{% url 'article:haystack_search' %}">
+                        <div class="input-group rounded">
+                    <input type="text" name="q" class="form-control  bg-transparent border " placeholder="搜索" autocomplete="off" required=True>
+                        </div>
+                 </form>
+            </a>
+            <a href="{% url 'mlog:vlog_list' %}">My Vlogs</a>
+            <a href="#">My Stories</a>
+            <a href="#">Categories</a>
+        </nav>
+    </div><!-- /menu-wrap-->
+    <div class="content-wrap">
+        {% block content %}{% endblock content %}
+    </div><!-- /content-wrap-->
 
- <body  style="padding-top: 80px; background-color: whitesmoke" >
 
-
-    <!-- 引入导航栏 -->
-    {% include 'header.html' %}
-    <!-- 预留具体页面的位置 -->
-    <div id="wrapper">
-            {% block base_content %}
-                <div class="container">
-                <div class="row">
-                    <div class="col-xs-6 col-md-4 col-center-block">
-
-                    </div>
-                </div>
-                </div>
-                {% block content %}
-                {% endblock %}
-            {% endblock %}
-        <div id="push"></div>
-    </div>
-    <!-- 引入注脚 -->
-    {% include 'footer.html' %}
-     <style>
-        html, body {
-            height: 100%;
-            margin: 0;
-        }
-
-        #wrapper {
-            min-height: 100%;
-            margin-bottom: -60px;
-        }
-
-        #footer,
-        #push {
-            height: 60px;
-        }
-    </style>
     <!-- jQuery文件。务必在bootstrap.min.js 之前引入 -->
     <script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
+     <script src="{% static 'sticky_sidebar/jquery.sticky-sidebar.js' %}"></script>
+    <script src="https://cdn.bootcss.com/layer/2.1/layer.js"></script>
+     <script src="{% static 'progress/progress.js' %}"></script>
     {% include 'back_to_top_func.html' %}
     {% block script %} {% endblock script %}
     <!-- bootstrap.bundle.min.js 用于弹窗、提示、下拉菜单，包含了 popper.min.js -->
-     <script src="https://cdn.bootcss.com/popper.js/1.15.0/esm/popper.min.js"></script>
+    <script src="https://cdn.bootcss.com/popper.js/1.15.0/umd/popper.js"></script>
     <!-- 最新的 Bootstrap4 核心 JavaScript 文件 -->
-    <script src="https://cdn.bootcss.com/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
+     <script src="https://cdn.bootcss.com/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
+     <script src="https://cdn.bootcss.com/highlightjs-line-numbers.js/2.7.0/highlightjs-line-numbers.min.js"></script>
+    <script src="{% static 'csrf.js' %}"></script>
+    <script src="{% static 'sidebar/js/classie.js' %}"></script>
+	<script src="{% static 'sidebar/js/main.js' %}"></script>
+
+
 </body >
 
 
